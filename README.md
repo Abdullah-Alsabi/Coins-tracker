@@ -116,7 +116,5 @@ The url to your presentation slides
 
 The url to your Wireframe 
 
-[Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1
-
-)
+[Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1)
 
