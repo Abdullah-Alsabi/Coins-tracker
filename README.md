@@ -96,15 +96,14 @@ Exit model
 
 * Trello/Kanban
 
-[Link to your trello board](https://trello.com/b/PBqtkUFX/curasan) or picture of your physical board
+[Link to your trello board](https://trello.com/b/vm8ebCHu/final-project-kanban) 
 
 * Git
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/screeeen/project-client)
+[Github repository Link](https://github.com/Abdullah-Alsabi/Final-Project)
 
-[Server repository Link](https://github.com/screeeen/project-server)
 
 [Deployed App Link](http://heroku.com/)
 
@@ -112,10 +111,12 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link](http://slides.com/)
+[Slides Link](https://docs.google.com/presentation/d/1AEQgQgVEEf4n3ua5D9rTpcHKUKW4q-CpHiId2PsPtJw/edit?usp=sharing)
 * Wireframe
 
 The url to your Wireframe 
 
-[Figma Link](http://www.figma.com/file/GNvDVBD1NPTydU2PJy4DDM/dataBASE?node-id=0%3A88)
+[Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1
+
+)
 
