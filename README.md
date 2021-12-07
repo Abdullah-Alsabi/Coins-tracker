@@ -94,27 +94,23 @@ Exit model
 
 ### Links
 
-* Trello/Kanban
+* Trello
 
 [Link to your trello board](https://trello.com/b/vm8ebCHu/final-project-kanban) 
 
 * Git
 
-The url to your repository and to your deployed project
-
 [Github repository Link](https://github.com/Abdullah-Alsabi/Final-Project)
 
+* HeroKu
 
 [Deployed App Link](http://heroku.com/)
 
 * Slides
 
-The url to your presentation slides
-
 [Slides Link](https://docs.google.com/presentation/d/1AEQgQgVEEf4n3ua5D9rTpcHKUKW4q-CpHiId2PsPtJw/edit?usp=sharing)
-* Wireframe
 
-The url to your Wireframe 
+* Wireframe
 
 [Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1)
 
