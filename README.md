@@ -2,15 +2,23 @@
 
 
 ## User Stories
-- **Signup:** As an anon I can sign up in the platform so that I can start playing into competition
-- **Login:** As a user I can login to the platform so that I can log my exit points
-- **Logout:** As a user I can logout from the platform so no one else can use it
-- **Add Exit Points** As a user I can add an exit point
-- **Edit Exit Points** As a user I can edit an exit point
-- **Add PreOpp Checklist** As a user I can add players to a tournament
-- **Edit PreOpp Checklist** As a user I can edit a player profile to fit into the tournament view
-- **View Tournament Table** As a user I want to see the tournament table
-- **Edit User** As a user I can edit my profile, add or substract exit points
+- **Sign Up:** As an anon I can sign up in the platform so that I can create a portfolio.
+- **Sign In:** As a user I can sign in to the platform so that I can check my portfolios and update them.
+- **Sign Out:** As a user I can sign out from the platform so no one else can see my portfolios.
+- **Edit User** As a user I can edit my profile.
+- **Add Portfolios** As a user I can add a portfolio.
+- **Edit Portfolio** As a user I can edit my portfolio.
+- **View Portfolio** As a user I can view my Portfolio.
+- **Delete Portfolio** As a user I can delete my portfolio.
+- **Add transaction** As a user I can add transactions to my portfolios.
+- **Edit transaction** As a user I can edit my transaction.
+- **view transaction** As a user I can view my transaction.
+- **Delete transaction** As a user I can delete my transaction.
+- **View Coins Table** As any type of users I can see the coins table.
+- **View Coin Info** As any type of users I can see each coin info.
+
+## Admin Stories 
+- **Admin Edit User** As an admin I can edit users profile
 
 
 ## Client / Frontend
@@ -19,25 +27,29 @@
 
 | Path             | Component            | Permissions                | Behavior                                                     |
 | ---------------- | -------------------- | -------------------------- | ------------------------------------------------------------ |
-| `/`              | SplashPage           | public `<Route>`           | Home page                                                    |
-| `/signup`        | SignupPage           | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
-| `/login`         | LoginPage            | anon only `<AnonRoute>`    | Login form, link to signup, navigate to homepage after login |
-| `/exitpoint`     | TournamentListPage   | user only `<PrivateRoute>` | Shows all exit points in a list                              |
-| `/exitpoint/add` | TournamentListPage   | user only `<PrivateRoute>` | Edits a exit points                                          |
-| `/exitpoint/:id` | TournamentDetailPage | user only `<PrivateRoute>` | Details of a exit points to edit                             |
-| `/exitpoint/:id` | n/a                  | user only `<PrivateRoute>` | Delete exit points                                           |
+| `/`              | HomePage             | public `<Route>`           | Home page                                                    |
+| `/signup`        | SignupPage           | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
+| `/login`         | SigninPage           | anon only `<AnonRoute>`    | Login form, link to signup, navigate to homepage after login |
+| `/coins`         | CoinsPage            | public `<Route>`           | Shows all coins in a Table                                   |
+| `/portfolio/add` | AddPortfolioPage     | user only `<PrivateRoute>` | Add portfolio                                                |
+| `/portfolio/:id` | PortfolioPage        | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
+| `/portfolio/:id` | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
 
 ### Components
 
-- LoginPage
-- SplashPage
-- ProfilePage
+- SigninPage
 - SignupPage
-- EditProfilePage
-- EditExitPointPage
-- ExitPointPage
-- EditProfilePage
+- ProfilePage
+- HomePage
+- CoinsPage
+- CoinPage
+- PortfolioPage(With Edit)
+- AddPortfolioPage
+- TransactionPage(With Out Edit)
+- AddTransactionPage
 - Navbar
+- Footer
+
 
 ## Server / Backend
 
@@ -47,8 +59,8 @@ User model
 
 ```
 {
-  user: {type: String, required: true, unique: true},
-  email: {type: String, required: true, unique: true},
+  userName: {type: String, required: true, unique: true},
+  email: {type: String, required: true, unique: true,isValid},
   password: {type: String, required: true},
   favorites: [{type: Schema.Types.ObjectId,ref:'Exit'}]
   userAgreement: {type: boolean, required: true, default: false}
