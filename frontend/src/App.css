@@ -1,0 +1,27 @@
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.App {
+  text-align: center;
+}
+
+/* NavBar css */
+.continer__NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+}
+.Link_Nav {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+  font-size: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.Link_Nav:hover {
+  color: rgb(0, 0, 0);
+  transform: scale(1.05);
+}
