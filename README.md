@@ -1,21 +1,19 @@
-# Final-Project
+# Coins-Tracker
 
 
 ## User Stories
 - **Sign Up:** As an anon I can sign up in the platform so that I can create a portfolio.
 - **Sign In:** As a user I can sign in to the platform so that I can check my portfolios and update them.
 - **Sign Out:** As a user I can sign out from the platform so no one else can see my portfolios.
-- **Edit User** As a user I can edit my profile.
 - **Add Portfolios** As a user I can add a portfolio.
-- **Edit Portfolio** As a user I can edit my portfolio.
 - **View Portfolio** As a user I can view my Portfolio.
 - **Delete Portfolio** As a user I can delete my portfolio.
 - **Add transaction** As a user I can add transactions to my portfolios.
 - **Edit transaction** As a user I can edit my transaction.
-- **view transaction** As a user I can view my transaction.
+- **View transaction** As a user I can view my transaction.
 - **Delete transaction** As a user I can delete my transaction.
 - **View Coins Table** As any type of users I can see the coins table.
-- **View Coin Info** As any type of users I can see each coin info.
+- **View Coin Details** As any type of users I can see each coin details.
 
 ## Admin Stories 
 - **Admin Edit User** As an admin I can edit users profile
@@ -28,12 +26,19 @@
 | Path             | Component            | Permissions                | Behavior                                                     |
 | ---------------- | -------------------- | -------------------------- | ------------------------------------------------------------ |
 | `/`              | HomePage             | public `<Route>`           | Home page                                                    |
-| `/signup`        | SignupPage           | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
-| `/login`         | SigninPage           | anon only `<AnonRoute>`    | Login form, link to signup, navigate to homepage after login |
-| `/coins`         | CoinsPage            | public `<Route>`           | Shows all coins in a Table                                   |
-| `/portfolio/add` | AddPortfolioPage     | user only `<PrivateRoute>` | Add portfolio                                                |
-| `/portfolio/:id` | PortfolioPage        | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
+| `/signup`        | SignUp           | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
+| `/signin`         | SignIn           | anon only `<AnonRoute>`    | Signin form, link to signup, navigate to homepage after login |
+| `/admin`         | Admin           | Admin only `<AdminRoute>`    | Shows all users |
+| `/admin/:id`         | Admin           | Admin only `<AdminRoute>`    |Edit user info |
+| `/coins`         | Coins            | public `<Route>`           | Shows all coins in a Table                                   |
+| `/coin`         | Coin            | public `<Route>`           | Shows all coin details                                   |
+| `/portfolio/add` | AddPortfolio     | user only `<PrivateRoute>` | Add portfolio                                                |
+| `/portfolio/:id` | Portfolio        | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
 | `/portfolio/:id` | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
+| `/portfolio/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                                                |
+| `/portfolio/edittransaction/:id` | EditTransaction     | user only `<PrivateRoute>` | Edit transaction                                               |
+| `/portfolio/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                              |
+| `/portfolio/transaction/:id` | n/a                  | user only `<PrivateRoute>` | Delete transaction                                             |
 
 ### Components
 
@@ -106,23 +111,14 @@ Exit model
 
 ### Links
 
-* Trello
 
-[Link to your trello board](https://trello.com/b/vm8ebCHu/final-project-kanban) 
-
-* Git
+[Trello board Link](https://trello.com/b/vm8ebCHu/final-project-kanban) 
 
 [Github repository Link](https://github.com/Abdullah-Alsabi/Final-Project)
 
-* HeroKu
-
 [Deployed App Link](http://heroku.com/)
 
-* Slides
-
 [Slides Link](https://docs.google.com/presentation/d/1AEQgQgVEEf4n3ua5D9rTpcHKUKW4q-CpHiId2PsPtJw/edit?usp=sharing)
-
-* Wireframe
 
 [Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1)
 
