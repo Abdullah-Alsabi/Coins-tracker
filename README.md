@@ -16,7 +16,8 @@
 - **View Coin Details** As any type of users I can see each coin details.
 
 ## Admin Stories 
-- **Admin Edit User** As an admin I can edit users profile
+- **View Users** an admin I can view all users.
+- **Admin Edit User** As an admin I can edit users profile.
 
 
 ## Client / Frontend
@@ -26,34 +27,38 @@
 | Path             | Component            | Permissions                | Behavior                                                     |
 | ---------------- | -------------------- | -------------------------- | ------------------------------------------------------------ |
 | `/`              | HomePage             | public `<Route>`           | Home page                                                    |
-| `/signup`        | SignUp           | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
-| `/signin`         | SignIn           | anon only `<AnonRoute>`    | Signin form, link to signup, navigate to homepage after login |
-| `/admin`         | Admin           | Admin only `<AdminRoute>`    | Shows all users |
-| `/admin/:id`         | Admin           | Admin only `<AdminRoute>`    |Edit user info |
-| `/coins`         | Coins            | public `<Route>`           | Shows all coins in a Table                                   |
-| `/coin`         | Coin            | public `<Route>`           | Shows all coin details                                   |
-| `/portfolio/add` | AddPortfolio     | user only `<PrivateRoute>` | Add portfolio                                                |
-| `/portfolio/:id` | Portfolio        | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
+| `/signup`        | SignUp               | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
+| `/signin`        | SignIn               | anon only `<AnonRoute>`    | Signin form, link to signup, navigate to homepage after login|
+|  n/a         | NavBar               | user only `<PrivateRoute>`    | Signout button , remove the cookie , navigate to homepage after signout|
+| `/admin`         | Admin                | Admin only `<AdminRoute>`  | Shows all users                                              |
+| `/admin/:id`     | Admin                | Admin only `<AdminRoute>`  |Edit user info                                                |
+| `/coins`         | Coins                | public `<Route>`           | Shows all coins in a Table                                   |
+| `/coin`          | Coin                 | public `<Route>`           | Shows all coin details                                       |
+| `/portfolio/:id` | Portfolio            | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
+| `/portfolio/add` | AddPortfolio         | user only `<PrivateRoute>` | Add portfolio                                                |
 | `/portfolio/:id` | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
-| `/portfolio/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                                                |
-| `/portfolio/edittransaction/:id` | EditTransaction     | user only `<PrivateRoute>` | Edit transaction                                               |
-| `/portfolio/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                              |
-| `/portfolio/transaction/:id` | n/a                  | user only `<PrivateRoute>` | Delete transaction                                             |
+| `/portfolio/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                  |
+| `/portfolio/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                      |
+| `/portfolio/edittransaction/:id` | EditTransaction     | user only `<PrivateRoute>` | Edit transaction                              |
+| `/portfolio/transaction/:id` | n/a                  | user only `<PrivateRoute>` | Delete transaction                               |
 
 ### Components
-
-- SigninPage
-- SignupPage
-- ProfilePage
 - HomePage
-- CoinsPage
-- CoinPage
-- PortfolioPage(With Edit)
-- AddPortfolioPage
-- TransactionPage(With Out Edit)
-- AddTransactionPage
-- Navbar
+- SignUp
+- SignIn
+- Admin
+- Coins
+- Coin
+- Portfolio
+- AddPortfolio
+- Transaction
+- AddTransaction
+- EditTransaction
+- NavBar
 - Footer
+- Loading
+- ErrorMessage
+
 
 
 ## Server / Backend
@@ -64,33 +69,65 @@ User model
 
 ```
 {
-  userName: {type: String, required: true, unique: true},
-  email: {type: String, required: true, unique: true,isValid},
-  password: {type: String, required: true},
-  favorites: [{type: Schema.Types.ObjectId,ref:'Exit'}]
-  userAgreement: {type: boolean, required: true, default: false}
+  userName: {
+    type: String,
+    unique: true,
+    required: [true, " Username should be provided and unique"],
+  },
+  email: {
+    type: String,
+    required: [true, "email should be provided and unique"],
+    unique: true,
+    lowercase: true,
+    validate: [isEmail, "isInvalid"],
+  },
+  password: {
+    type: String,
+    minlength: [8, "minemum password length is 8"],
+    required: [true, "password should be provided"],
+  },
+  Portfolios: {
+    type: [PortfolioSchema],
+    default: [],
+  },
 }
 ```
 
-Exit model
+Portfolio model
 
 ```
- {
-   name: {type: String, required: true},
-   img: {type: String},
-   aproachLat: {type: Number, required: true}
-   aproachLong: {type: Number, required: true}
-   aproachDescription: {type: String}
-   exitLat: {type: Number, required: true}
-   exitLong: {type: Number, required: true}
-   exitDescription: {type: String}
-   landiZoneLat: {type: Number, required: true}
-   landingZoneLong: {type: Number, required: true}
-   landingZoneDescription: {type: String}
-   creator: {type: Schema.Types.ObjectId,ref:'User'}
-   altitud: {type: number}
-   
- }
+{
+  portfolioName: {
+    type: String,
+    unique: true,
+    required: [true, " portfolioName should be provided"],
+  },
+  totalCost: {
+    type: Number,
+    required: [false, " totalCost is optional"],
+  },
+  transactions: {
+    type: [TransactionSchema],
+    default: [],
+  },
+}
+```
+
+Transaction model
+
+//Not Finished yet
+```
+{
+  transactionName: {
+    type: String,
+    unique: true,
+    required: [true, " Username should be provided"],
+  },
+   transactionType: {
+    type: String,
+    required: [true, " Username should be provided"],
+  },
+}
 ```
 
 ### Backend routes
