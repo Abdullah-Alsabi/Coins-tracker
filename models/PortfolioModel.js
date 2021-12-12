@@ -1,3 +1,4 @@
+const TransactionSchema = require("./TransactionModel");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 //done
@@ -10,6 +11,10 @@ let PortfolioSchema = new Schema({
   totalCost: {
     type: Number,
     required: [false, " totalCost is optional"],
+  },
+  transactions: {
+    type: [TransactionSchema],
+    default: [],
   },
 });
 

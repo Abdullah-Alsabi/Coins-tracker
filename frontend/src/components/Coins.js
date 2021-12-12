@@ -6,22 +6,23 @@ import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
 
-function HomePage() {
-  const [topCoins, settopCoins] = useState([]);
+function Coins() {
+  const [AllCoins, setallCoins] = useState([]);
   useEffect(() => {
     axios
       .get(
-        "https://api.coinstats.app/public/v1/coins?skip=0&limit=5&currency=USD"
+        "https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=USD"
       )
       .then((res) => {
         console.log(res.data.coins);
-        settopCoins(res.data.coins);
+        setallCoins(res.data.coins);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  console.log(topCoins);
+  console.log(AllCoins);
+
   return (
     <div className="main-container">
       <h2>Welcome to Coins Tracker</h2>
@@ -56,7 +57,7 @@ function HomePage() {
             </tr>
           </thead>
           <tbody>
-            {topCoins.map((coin, index) => {
+            {AllCoins.map((coin, index) => {
               return (
                 <tr>
                   <td>
@@ -82,12 +83,7 @@ function HomePage() {
                   </td>
                   <td style={{ textAlign: "justify" }}>
                     <Link to={"/coins/" + coin.id}>
-                      <span>
-                        $ ${" "}
-                        {coin.price < 0.1
-                          ? coin.price.toFixed(5)
-                          : coin.price.toFixed(2)}
-                      </span>
+                      $ {coin.price < 0.1 ? coin.price.toFixed(5) : coin.price.toFixed(2)}
                     </Link>
                   </td>
                   <td>
@@ -154,20 +150,8 @@ function HomePage() {
           </tbody>
         </Table>
       </div>
-      <Link to={"/coins"}>
-        <p
-          style={{
-            borderRadius: "0.3rem",
-            background: "#E0E0E0",
-            color: "#A9A9A9",
-          }}
-          className="mt-3 p-2"
-        >
-          Show More{" "}
-        </p>
-      </Link>
     </div>
   );
 }
 
-export default HomePage;
+export default Coins;

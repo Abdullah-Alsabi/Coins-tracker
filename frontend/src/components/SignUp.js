@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import "./signin-signup-nav-footer.css";
-import userStatus from "./userStatus";
+import userStatus from "../utils/userStatus";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 

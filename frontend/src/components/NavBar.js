@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import "../App.css";
-import userStatus from "./userStatus";
+import userStatus from "../utils/userStatus";
 import Logo from "../images/Logo.png";
 
 function NavBar() {
@@ -20,7 +20,13 @@ function NavBar() {
   let token = getCookie("jwt");
   setAuth(token === undefined ? false : true);
   console.log(auth);
-
+  let userData;
+  if (
+    token === undefined
+      ? null
+      : (userData = JSON.parse(atob(token.split(".")[1])))
+  )
+    console.log(userData.id.userName);
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -43,22 +49,28 @@ function NavBar() {
               </Link>
             ) : null}
             {auth ? (
-              <Button
-                variant="danger"
-                onClick={() => {
-                  axios
-                    .get("/users/signout")
-                    .then((res) => {
-                      console.log(res);
-                      setAuth(false);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                }}
-              >
-                signout
-              </Button>
+              <div className="authDiv">
+                {" "}
+                <h6 className="Link_Nav_userWelcome">
+                  Welcome {userData.id.userName}{" "}
+                </h6>{" "}
+                <Button
+                  className="Link_Nav_signOut"
+                  variant="danger"
+                  onClick={() => {
+                    axios
+                      .get("/users/signout")
+                      .then((res) => {
+                        setAuth(false);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  signout
+                </Button>
+              </div>
             ) : null}
           </Nav>
         </Navbar.Collapse>

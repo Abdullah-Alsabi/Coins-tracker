@@ -9,6 +9,10 @@ let TransactionSchema = new Schema({
     unique: true,
     required: [true, " Username should be provided"],
   },
+  transactionType: {
+    type: String,
+    required: [true, " Username should be provided"],
+  },
 });
 
 module.exports = TransactionSchema;

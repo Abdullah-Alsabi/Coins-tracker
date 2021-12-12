@@ -1,3 +1,4 @@
+const PortfolioSchema = require("./PortfolioModel");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { isEmail } = require("validator");
@@ -21,9 +22,10 @@ let UserSchema = new Schema({
     minlength: [8, "minemum password length is 8"],
     required: [true, "password should be provided"],
   },
-  // Portfolio: {
-  //   type: [PortfolioSchema],
-  // },
+  Portfolios: {
+    type: [PortfolioSchema],
+    default: [],
+  },
 });
 
 //fire a function after doc saved to db
@@ -44,22 +46,6 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
-
-
-// //static method for login user
-// UserSchema.statics.login = async function (userName, password) {
-//   const user = await this.findOne({ userName: userName });
-//   if (user) {
-//     //then next line will hash the first parameter then compare it eith the one in the db
-//     //return T or F
-//     const auth = await bcrypt.compare(password, user.password);
-//     if (auth) {
-//       return user;
-//     }
-//     throw Error("incorrect password");
-//   }
-//   throw Error("incorrect username");
-// };
 
 //first parameter is the name for the db collection
 //in the portfolio and coin i should just export them just the last line

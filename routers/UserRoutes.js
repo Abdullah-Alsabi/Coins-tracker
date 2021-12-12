@@ -62,8 +62,8 @@ router.post(
 //sign out
 router.get("/signout", (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/"); 
-  //because it never stops
+  res.redirect("/");
+  //because it never stops we use res.end()
   res.end();
 });
 

@@ -3,9 +3,12 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/HomePage";
 import { useState } from "react";
-import userStatus from "./components/userStatus";
+import userStatus from "./utils/userStatus";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Coins from "./components/Coins";
+import Coin from "./components/Coin";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -29,8 +32,11 @@ function App() {
             <Route exact path="/" element={<HomePage />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/signin" element={<SignIn />}></Route>
+            <Route path="/coins" element={<Coins />}></Route>
+            <Route path="/coins/:id" element={<Coin />}></Route>
           </Routes>
         </Router>
+        <Footer />
       </div>
     </userStatus.Provider>
   );
