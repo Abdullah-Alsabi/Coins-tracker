@@ -1,19 +1,4 @@
-// // delete
-// router.delete("/deleteauthor/:id", (req, res) => {
-//     Users.findByIdAndDelete(req.params.id)
-//       .then(() => {
-//         Users.find()
-//           .then((data) => {
-//             res.json(data);
-//           })
-//           .catch((err) => {
-//             console.log(err);
-//           });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   });
-
-
-
+const express = require("express");
+const router = express.Router();
+let Users = require("../models/UserModel");
+const TransactionSchema = require("../models/TransactionModel");

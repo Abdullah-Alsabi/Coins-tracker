@@ -59,22 +59,14 @@ router.post("/addportfolio", async (req, res) => {
 //   });
 // });
 
-// router.delete("/deleteportfolio/:id", (req, res) => {
-//   Users
-//     .findByIdAndUpdate(req.params.id)
-//     .then((data) => {
-//       data.portfolios
-//         .find()
-//         .then((data) => {
-//           res.json(data);
-//         })
-//         .catch((err) => {
-//           console.log(err);
-//         });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+router.post("/deleteportfolio/:id", async (req, res) => {
+  const { id } = req.params;
+  const { userId } = req.body;
+  const user = await Users.findByIdAndUpdate(userId);
+  const restPort = user.Portfolios.filter((p) => p._id.toString() !== id);
+  user.Portfolios = restPort;
+  user.save();
+  res.json("port deleted");
+});
 
 module.exports = router;

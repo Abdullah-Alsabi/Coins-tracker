@@ -1,0 +1,30 @@
+.searchform {
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+#input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #645979;
+  outline: none;
+  border-radius: 5px 5px 0 0;
+  background-color: #ffffff;
+  font-size: 16px;
+}
+ul {
+  list-style: none;
+  display: grid !important;
+  grid-template-columns: 1fr;
+}
+.list {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0 0 5px 5px;
+}
+.list-items {
+  padding: 10px 5px;
+}
+.list-items:hover {
+  background-color: #dddddd;
+}

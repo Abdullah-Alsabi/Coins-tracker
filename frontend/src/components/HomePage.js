@@ -9,10 +9,9 @@ import Loading from "./Loading";
 
 function HomePage() {
   const [topCoins, settopCoins] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    setloading(true);
     axios
       .get(
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=5&currency=USD"
@@ -27,6 +26,7 @@ function HomePage() {
       });
   }, []);
   console.log(topCoins);
+  if (loading) return <Loading />;
   return (
     <div className="main-container">
       <h2>Welcome to Coins Tracker</h2>

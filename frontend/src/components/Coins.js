@@ -9,10 +9,9 @@ import Loading from "./Loading";
 
 function Coins() {
   const [AllCoins, setallCoins] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    setloading(true);
     axios
       .get(
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=USD"
@@ -26,7 +25,14 @@ function Coins() {
         console.log(err);
       });
   }, []);
-  console.log(AllCoins);
+  //get coins names
+  // let s = "";
+  // AllCoins.forEach((c) => {
+  //   s += `"${c.id}",`;
+  // });
+  // console.log(s);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="main-container">

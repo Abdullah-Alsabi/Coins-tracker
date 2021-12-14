@@ -7,7 +7,7 @@ import Loading from "./Loading";
 import userStatus from "../utils/userStatus";
 function AllPortfolios() {
   const [AllPortfolios, setAllPortfolios] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   let { auth, setAuth } = useContext(userStatus);
 
   function getCookie(cname) {
@@ -22,15 +22,13 @@ function AllPortfolios() {
   setAuth(token === undefined ? false : true);
   console.log(auth);
   let userData;
-  if (
-    token === undefined
-      ? null
-      : (userData = JSON.parse(atob(token.split(".")[1])))
-  )
-    console.log(userData.id._id);
+  let data;
+  //user id from cookie
 
   useEffect(() => {
-    setloading(true);
+    if (token === undefined) return null;
+    else userData = JSON.parse(atob(token.split(".")[1]));
+    data = { userId: userData.id._id };
     axios
       .get("/portfolio/getportfolios/" + userData.id._id)
       .then((res) => {
@@ -43,16 +41,18 @@ function AllPortfolios() {
   }, []);
 
   console.log(AllPortfolios);
-
+  if (loading) return <Loading />;
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
-      {loading && <Loading />}
       All portfolios
       <div className="portfolios">
         {AllPortfolios.map((p) => {
           return (
             <Link to={"/portfolios/" + p._id}>
-              <Card className="Portfolio__card" style={{ width: "18rem" }}>
+              <Card
+                className="Portfolio__card"
+                style={{ width: "18rem", height: "100%" }}
+              >
                 <Card.Body>
                   <Card.Title>{p.portfolioName}</Card.Title>
                   <Card.Text>

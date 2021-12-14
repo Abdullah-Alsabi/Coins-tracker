@@ -5,7 +5,7 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import "../App.css";
 import userStatus from "../utils/userStatus";
 import Logo from "../images/Logo.png";
-
+import Search from "./Search";
 function NavBar() {
   let { auth, setAuth } = useContext(userStatus);
 
@@ -58,6 +58,10 @@ function NavBar() {
                 Add portfolio
               </Link>
             ) : null}
+            <div className="searchDiv">
+              {" "}
+              <Search />
+            </div>
             {auth ? (
               <div className="authDiv">
                 {" "}

@@ -12,6 +12,10 @@ import Coin from "./components/Coin";
 import AddPortfolio from "./components/AddPortfolio";
 import Portfolio from "./components/Portfolio";
 import AllPortfolios from "./components/AllPortfolios";
+import Transaction from "./components/Transaction";
+import AddTransaction from "./components/AddTransaction";
+import EditTransaction from "./components/EditTransaction";
+import Search from "./components/Search";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -39,7 +43,13 @@ function App() {
             <Route path="/portfolios" element={<AllPortfolios />}></Route>
             <Route path="/portfolios/:id" element={<Portfolio />}></Route>
             <Route path="/addportfolio" element={<AddPortfolio />}></Route>
+            <Route
+              path="/transactions/edit/:id"
+              element={<EditTransaction />}
+            ></Route>
+            <Route path="/addtransaction" element={<AddTransaction />}></Route>
             <Route path="/coins/:id" element={<Coin />}></Route>
+            <Route path="/search" element={<Search />}></Route>
           </Routes>
         </Router>
         <Footer />

@@ -9,10 +9,9 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 function Coin() {
   const { id } = useParams();
   const [Coindetails, setCoindetails] = useState({});
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    setloading(true);
     axios
       .get("https://api.coinstats.app/public/v1/coins/" + id + "?currency=USD")
       .then((res) => {
@@ -23,7 +22,7 @@ function Coin() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [Coindetails]);
   console.log(Coindetails);
 
   function convertToInternationalCurrencySystem(labelValue) {
@@ -38,10 +37,9 @@ function Coin() {
       ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + "K"
       : Math.abs(Number(labelValue));
   }
-
+  if (loading) return <Loading />;
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
-      {loading && <Loading />}
       <div className="imgDiv mb-3">
         <img
           src={Coindetails.icon}
