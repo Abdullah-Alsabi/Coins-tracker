@@ -6,6 +6,7 @@ const PORT = 3001;
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const usersRouter = require("./routers/UserRoutes");
+const portfolioRouter = require("./routers/PortfolioRoutes");
 
 require("dotenv").config();
 // Mongoose Here
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/users", usersRouter);
+app.use("/portfolio", portfolioRouter);
 app.use(notFound);
 app.use(errorHandler);
 // app.use("/authors", authorsRouter);

@@ -5,10 +5,14 @@ import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
+import Loading from "./Loading";
 
 function HomePage() {
   const [topCoins, settopCoins] = useState([]);
+  const [loading, setloading] = useState(false);
+
   useEffect(() => {
+    setloading(true);
     axios
       .get(
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=5&currency=USD"
@@ -16,6 +20,7 @@ function HomePage() {
       .then((res) => {
         console.log(res.data.coins);
         settopCoins(res.data.coins);
+        setloading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -25,8 +30,9 @@ function HomePage() {
   return (
     <div className="main-container">
       <h2>Welcome to Coins Tracker</h2>
+      {loading && <Loading />}
       <div className="container_table">
-        <Table striped bordered hover variant="light">
+        <Table bordered hover variant="light">
           <thead>
             <tr
               style={{
@@ -83,7 +89,7 @@ function HomePage() {
                   <td style={{ textAlign: "justify" }}>
                     <Link to={"/coins/" + coin.id}>
                       <span>
-                        $ ${" "}
+                        $
                         {coin.price < 0.1
                           ? coin.price.toFixed(5)
                           : coin.price.toFixed(2)}
@@ -129,7 +135,7 @@ function HomePage() {
                           <i className="icon-priceDown">
                             <AiOutlineCaretDown />{" "}
                           </i>
-                          {coin.priceChange1d}
+                          {coin.priceChange1d * -1}
                         </span>
                       ) : null}
                     </Link>
@@ -159,11 +165,11 @@ function HomePage() {
           style={{
             borderRadius: "0.3rem",
             background: "#E0E0E0",
-            color: "#A9A9A9",
+            color: "#444",
           }}
-          className="mt-3 p-2"
+          className="mt-3 p-2 showMore"
         >
-          Show More{" "}
+          Show More
         </p>
       </Link>
     </div>

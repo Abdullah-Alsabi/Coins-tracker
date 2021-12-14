@@ -5,10 +5,14 @@ import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
+import Loading from "./Loading";
 
 function Coins() {
   const [AllCoins, setallCoins] = useState([]);
+  const [loading, setloading] = useState(false);
+
   useEffect(() => {
+    setloading(true);
     axios
       .get(
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=USD"
@@ -16,6 +20,7 @@ function Coins() {
       .then((res) => {
         console.log(res.data.coins);
         setallCoins(res.data.coins);
+        setloading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -26,6 +31,7 @@ function Coins() {
   return (
     <div className="main-container">
       <h2>Welcome to Coins Tracker</h2>
+      {loading && <Loading />}
       <div className="container_table">
         <Table striped bordered hover variant="light">
           <thead>
@@ -38,7 +44,6 @@ function Coins() {
               <th
                 style={{
                   borderTopLeftRadius: "0.6rem",
-                  borderLeftWidth: "0px",
                 }}
               >
                 #
@@ -83,7 +88,10 @@ function Coins() {
                   </td>
                   <td style={{ textAlign: "justify" }}>
                     <Link to={"/coins/" + coin.id}>
-                      $ {coin.price < 0.1 ? coin.price.toFixed(5) : coin.price.toFixed(2)}
+                      $
+                      {coin.price < 0.1
+                        ? coin.price.toFixed(5)
+                        : coin.price.toFixed(2)}
                     </Link>
                   </td>
                   <td>
@@ -98,7 +106,7 @@ function Coins() {
                           }}
                         >
                           <i className="icon-priceUp">
-                            <AiOutlineCaretUp />{" "}
+                            <AiOutlineCaretUp />
                           </i>
                           {coin.priceChange1d}
                         </span>
@@ -123,9 +131,9 @@ function Coins() {
                           }}
                         >
                           <i className="icon-priceDown">
-                            <AiOutlineCaretDown />{" "}
+                            <AiOutlineCaretDown />
                           </i>
-                          {coin.priceChange1d}
+                          {coin.priceChange1d * -1}
                         </span>
                       ) : null}
                     </Link>

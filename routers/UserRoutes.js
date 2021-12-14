@@ -44,7 +44,7 @@ router.post(
     const { userName, password } = req.body;
     const user = await Users.findOne({ userName });
     let token = generateToken(user);
-    if (user && (await user.matchPassword)) {
+    if (user && (await user.matchPassword(password))) {
       res.cookie("jwt", token, { httpOnly: false });
       res.json({
         _id: user._id,

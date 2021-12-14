@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 let PortfolioSchema = new Schema({
   portfolioName: {
     type: String,
-    unique: true,
     required: [true, " portfolioName should be provided"],
+    default: "First Portfolio",
   },
   totalCost: {
     type: Number,
     required: [false, " totalCost is optional"],
+    default: 0,
   },
   transactions: {
     type: [TransactionSchema],

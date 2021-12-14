@@ -49,6 +49,16 @@ function NavBar() {
               </Link>
             ) : null}
             {auth ? (
+              <Link className="Link_Nav" to="/portfolios">
+                My portfolios
+              </Link>
+            ) : null}
+            {auth ? (
+              <Link className="Link_Nav" to="/addportfolio">
+                Add portfolio
+              </Link>
+            ) : null}
+            {auth ? (
               <div className="authDiv">
                 {" "}
                 <h6 className="Link_Nav_userWelcome">

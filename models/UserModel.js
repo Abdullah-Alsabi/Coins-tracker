@@ -24,7 +24,8 @@ let UserSchema = new Schema({
   },
   Portfolios: {
     type: [PortfolioSchema],
-    default: [],
+    required: false,
+    default: [0],
   },
 });
 

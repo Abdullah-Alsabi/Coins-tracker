@@ -17,13 +17,13 @@
   text-decoration: none;
   color: #444;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 28px;
   margin-left: 30px;
   margin-right: 30px;
 }
 .Link_Nav:hover {
   color: rgb(0, 0, 0);
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 .authDiv {
   display: flex;
@@ -49,6 +49,10 @@
   position: relative;
   max-width: 95%;
 }
+table {
+  margin-bottom: 0 !important;
+}
+
 td {
   text-align: center;
   vertical-align: middle;
@@ -62,6 +66,37 @@ a:hover {
   color: #444;
 }
 
+.showMore:hover {
+  transform: scale(1.01);
+  color: #444 !important;
+}
+
+.middleInfoDiv {
+  margin-top: 1.5%;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: rgba(138, 138, 138, 0.102);
+}
+
+.hideMoreInfo {
+  display: none;
+}
+
+.IconForInfo:hover + .hideMoreInfo {
+  display: block;
+  color: #444;
+}
+.portfolios {
+  padding: 5%;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1% !important;
+}
+.Portfolio__card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
 @media only screen and (min-width: 1024px) {
   .authDiv {
     flex-direction: row;
@@ -77,11 +112,33 @@ a:hover {
     margin-right: 4%;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
+  .portfolios {
+    padding: 5%;
+    display: grid;
+    grid-row: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+  .portfolios {
+    padding: 5%;
+    display: grid;
+    grid-row: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 767px) {
   .authDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .portfolios {
+    padding: 5%;
+    display: grid;
+    grid-row: auto;
+    grid-template-columns: 1fr;
   }
 }

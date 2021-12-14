@@ -6,12 +6,13 @@ const Schema = mongoose.Schema;
 let TransactionSchema = new Schema({
   transactionName: {
     type: String,
-    unique: true,
     required: [true, " Username should be provided"],
+    default: "First transaction",
   },
   transactionType: {
     type: String,
-    required: [true, " Username should be provided"],
+    required: [true, "Transaction Type should be provided"],
+    default: "buy",
   },
 });
 

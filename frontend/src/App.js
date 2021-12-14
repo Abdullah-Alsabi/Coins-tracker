@@ -9,6 +9,9 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Coins from "./components/Coins";
 import Coin from "./components/Coin";
+import AddPortfolio from "./components/AddPortfolio";
+import Portfolio from "./components/Portfolio";
+import AllPortfolios from "./components/AllPortfolios";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -33,6 +36,9 @@ function App() {
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/coins" element={<Coins />}></Route>
+            <Route path="/portfolios" element={<AllPortfolios />}></Route>
+            <Route path="/portfolios/:id" element={<Portfolio />}></Route>
+            <Route path="/addportfolio" element={<AddPortfolio />}></Route>
             <Route path="/coins/:id" element={<Coin />}></Route>
           </Routes>
         </Router>
