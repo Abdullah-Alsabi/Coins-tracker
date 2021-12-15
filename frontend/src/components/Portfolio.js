@@ -140,11 +140,43 @@ function Portfolio() {
                 return (
                   <tr>
                     <td>
-                      <Link to={"/coins/" + t.id}>
-                        <span>{index + 1}</span>
+                      <Link to={"/coins/"}>
+                        <span>{t.coinName}</span>
                       </Link>
                     </td>
                     <td>
+                      <Link to={"/coins/"}>
+                        <span>{t.tranAmount}</span>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={"/coins/"}>
+                        <span>{t.tranPrice}</span>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={"/coins/"}>
+                        <span>{t.tranType}</span>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        ) : (
+          <h2>You don't have transactions yet</h2>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Portfolio;
+
+/*
+
+<td>
                       <Link to={"/coins/" + t.id}>
                         <div className="d-flex justify-content-start align-items-center">
                           <img
@@ -228,17 +260,4 @@ function Portfolio() {
                         </div>
                       </Link>
                     </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        ) : (
-          <h2>You don't have transactions yet</h2>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default Portfolio;
+*/

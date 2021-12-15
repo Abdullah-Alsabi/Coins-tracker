@@ -6,7 +6,7 @@ let PortfolioSchema = new Schema({
   portfolioName: {
     type: String,
     required: [true, " portfolioName should be provided"],
-    default: "First Portfolio",
+    default: "Portfolio",
   },
   totalCost: {
     type: Number,
@@ -15,7 +15,20 @@ let PortfolioSchema = new Schema({
   },
   transactions: {
     type: [TransactionSchema],
-    default: [],
+    default: [
+      {
+        coinName: "bitcoin",
+        tranType: "sell",
+        tranAmount: 0.5,
+        tranPrice: 40000,
+      },
+      {
+        coinName: "bitcoin",
+        tranType: "sell",
+        tranAmount: 0.5,
+        tranPrice: 40000,
+      },
+    ],
   },
 });
 

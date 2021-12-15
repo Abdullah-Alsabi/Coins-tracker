@@ -22,12 +22,10 @@ function AddPortfolio() {
   setAuth(token === undefined ? false : true);
   console.log(auth);
   let userData;
-  if (
-    token === undefined
-      ? null
-      : (userData = JSON.parse(atob(token.split(".")[1])))
-  )
-    console.log(userData.id._id);
+  if (token === undefined) return null;
+  else userData = JSON.parse(atob(token.split(".")[1]));
+
+  console.log(userData.id._id);
 
   async function hundleSubmit(e) {
     e.preventDefault();
