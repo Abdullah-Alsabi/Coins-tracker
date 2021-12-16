@@ -59,7 +59,6 @@ function NavBar() {
               </Link>
             ) : null}
             <div className="searchDiv">
-              {" "}
               <Search />
             </div>
             {auth ? (

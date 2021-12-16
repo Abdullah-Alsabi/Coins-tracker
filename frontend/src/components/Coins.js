@@ -48,6 +48,7 @@ function Coins() {
               }}
             >
               <th
+                className="onPhone"
                 style={{
                   borderTopLeftRadius: "0.6rem",
                 }}
@@ -58,6 +59,7 @@ function Coins() {
               <th>Price</th>
               <th>24h Change</th>
               <th
+                className="onPhone"
                 style={{
                   borderTopRightRadius: "0.6rem",
                   borderRightColor: "transparent",
@@ -71,33 +73,36 @@ function Coins() {
             {AllCoins.map((coin, index) => {
               return (
                 <tr>
-                  <td>
+                  <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <span>{index + 1}</span>
                     </Link>
                   </td>
                   <td>
                     <Link to={"/coins/" + coin.id}>
-                      <div className="d-flex justify-content-start align-items-center">
+                      <div className="d-flex justify-content-start align-items-center coinNamediv">
                         <img
                           src={coin.icon}
-                          width={"40vw"}
-                          height={"40vh"}
+                          width={"35vw"}
+                          height={"35vh"}
                           alt={coin.id}
                         />
                         <span style={{ marginLeft: "1rem" }}>
-                          {coin.name}
-                          <span> • {coin.symbol}</span>
+                          <span className="onPhone">{coin.name}</span>
+                          <span className="onPhone">•</span>
+                          <span> {coin.symbol}</span>
                         </span>
                       </div>
                     </Link>
                   </td>
                   <td style={{ textAlign: "justify" }}>
                     <Link to={"/coins/" + coin.id}>
-                      $
-                      {coin.price < 0.1
-                        ? coin.price.toFixed(5)
-                        : coin.price.toFixed(2)}
+                      <span>
+                        $
+                        {coin.price < 0.1
+                          ? coin.price.toFixed(5)
+                          : coin.price.toFixed(2)}
+                      </span>
                     </Link>
                   </td>
                   <td>
@@ -112,7 +117,7 @@ function Coins() {
                           }}
                         >
                           <i className="icon-priceUp">
-                            <AiOutlineCaretUp />
+                            <AiOutlineCaretUp />{" "}
                           </i>
                           {coin.priceChange1d}
                         </span>
@@ -137,14 +142,14 @@ function Coins() {
                           }}
                         >
                           <i className="icon-priceDown">
-                            <AiOutlineCaretDown />
+                            <AiOutlineCaretDown />{" "}
                           </i>
                           {coin.priceChange1d * -1}
                         </span>
                       ) : null}
                     </Link>
                   </td>
-                  <td>
+                  <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <div>
                         <img

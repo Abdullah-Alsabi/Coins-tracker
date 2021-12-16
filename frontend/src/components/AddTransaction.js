@@ -1,15 +1,21 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./signin-signup-nav-footer.css";
 import "./serach.css";
+import "../App.css";
 import userStatus from "../utils/userStatus";
 import Loading from "./Loading";
 import "./addTransaction.css";
+import { Form } from "react-bootstrap";
+import HigherOrderSearch from "./HigherOrderSearch";
 
 function AddTransaction() {
+  //port id
+  const { id } = useParams();
+  console.log(id);
   let { auth, setAuth } = useContext(userStatus);
-  const [portfolio, setPortfolio] = useState({});
+  const [transaction, setTransaction] = useState({});
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
@@ -23,12 +29,35 @@ function AddTransaction() {
   }
   let token = getCookie("jwt");
   setAuth(token === undefined ? false : true);
-  console.log(auth);
   let userData;
   if (token === undefined) return null;
   else userData = JSON.parse(atob(token.split(".")[1]));
 
-  console.log(userData.id._id);
+  async function hundleSubmit(e) {
+    e.preventDefault();
+    console.log(transaction);
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      transaction.id = userData.id._id;
+      transaction._id = id;
+      setTransaction({ ...transaction });
+      setloading(true);
+      const { data } = await axios.post(
+        "/transactions/addtransactions",
+        transaction,
+        config
+      );
+
+      navigate("/portfolios");
+      setloading(false);
+    } catch (error) {
+      setloading(false);
+    }
+  }
 
   let names = [
     "bitcoin",
@@ -125,7 +154,7 @@ function AddTransaction() {
     "curve-dao-token",
     "nexo",
     "celo",
-    "eth_frax3crv-f_0xd632f22692fac7611d2aa1c0d552930d43caed3b",
+    "curve.fi ",
     "paxos-standard-token",
     "nem",
     "compound-governance-token",
@@ -136,10 +165,11 @@ function AddTransaction() {
   let sortedNames = names.sort();
 
   //reference
-  let input = document.getElementById("input");
+  let input = document.getElementById("inputtest");
   //Execute function on keyup
   if (input) {
     input.addEventListener("keyup", (e) => {
+      console.log(input.value);
       //loop through above array
       //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
       removeElements();
@@ -147,7 +177,7 @@ function AddTransaction() {
         //convert input to lowercase and compare with each string
         if (
           i.toLowerCase().startsWith(input.value.toLowerCase()) &&
-          input.value != ""
+          input.value !== ""
         ) {
           //create li element
           let listItem = document.createElement("li");
@@ -155,8 +185,10 @@ function AddTransaction() {
           listItem.classList.add("list-items");
           listItem.style.cursor = "pointer";
           listItem.onclick = function () {
-            displayNames(i);
-            console.log(input.value);
+            transaction.coinName = i;
+            setTransaction({ ...transaction });
+
+            input.value = i;
             removeElements();
           };
 
@@ -165,7 +197,8 @@ function AddTransaction() {
           word += i.substr(input.value.length);
           //display the value in array
           listItem.innerHTML = word;
-          document.querySelector(".list").appendChild(listItem);
+          document.querySelector(".listtest").appendChild(listItem);
+          console.log(listItem);
         }
       }
     });
@@ -182,90 +215,77 @@ function AddTransaction() {
     });
   }
 
-  async function hundleSubmit(e) {
-    e.preventDefault();
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      portfolio.id = userData.id._id;
-      setPortfolio({ ...portfolio });
-      setloading(true);
-      const { data } = await axios.post(
-        "/portfolio/addportfolio",
-        portfolio,
-        config
-      );
-      setAuth(true);
-      navigate("/portfolios");
-      setloading(false);
-    } catch (error) {
-      setloading(false);
-    }
-  }
-
   return (
     <div>
-      <div className="container d-flex flex-column align-items-center justify-content-center">
+      <div className="container d-flex flex-column align-items-center justify-content-center addTrans">
         {loading && <Loading />}
-        <form onSubmit={hundleSubmit} autocomplete="off">
-          <h2>Add Transaction</h2>
 
-          <label>Coin Name</label>
-          <div>
-            <form
-              className="searchform"
-              autoComplete="off"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <div>
-                <input type="text" id="input" placeholder="Ex. bitcoin" />
-              </div>
-              <ul className="list"></ul>
-            </form>
-          </div>
-
-          <label>Transaction Type</label>
-          <label className="containerType sell">
-            Sell
-            <input type="radio" name="radio" checked="checked" />
-            <span className="checkmark"></span>
-          </label>
-
-          <label className="containerType buy">
-            Buy
-            <input type="radio" name="radio" />
-            <span className="checkmark"></span>
-          </label>
-
-          <label>Amount</label>
-          <input
-            placeholder="Quantity of coins"
-            type="number"
-            onChange={(e) => {
-              portfolio.totalCost = e.target.value;
-              setPortfolio({ ...portfolio });
+        <h2>Add Transaction</h2>
+        <div>
+          <form
+            className="searchform"
+            autoComplete="off"
+            onSubmit={(e) => {
+              e.preventDefault();
             }}
-            name="totalCost"
-          />
+          >
+            <div>
+              <input type="text" id="inputtest" placeholder="Ex. bitcoin" />
+            </div>
+            <ul className="listtest"></ul>
+          </form>
+        </div>
 
-          <label>Price </label>
-          <input
-            type="number"
-            placeholder="In USD $"
-            onChange={(e) => {
-              portfolio.totalCost = e.target.value;
-              setPortfolio({ ...portfolio });
+        <label>Coin Name</label>
+
+        <label>Transaction Type</label>
+
+        <div className="mb-3">
+          <Form.Check
+            defaultChecked
+            onClick={() => {
+              transaction.tranType = "buy";
+              setTransaction({ ...transaction });
             }}
-            name="totalCost"
+            label="buy"
+            name="group1"
+            type={"radio"}
+            id={`buy`}
           />
-
-          <button className="submit__btn">Add</button>
-        </form>
+          <Form.Check
+            onClick={() => {
+              transaction.tranType = "sell";
+              setTransaction({ ...transaction });
+            }}
+            label="sell"
+            name="group1"
+            type={"radio"}
+            id={`sell`}
+          />
+        </div>
+        <label>Amount</label>
+        <input
+          placeholder="Quantity of coins"
+          type="number"
+          onChange={(e) => {
+            transaction.tranAmount = e.target.value;
+            setTransaction({ ...transaction });
+          }}
+          name="totalCost"
+        />
+        <label>Price </label>
+        <input
+          type="number"
+          placeholder="In USD $"
+          onChange={(e) => {
+            transaction.tranPrice = e.target.value;
+            setTransaction({ ...transaction });
+          }}
+          name="totalCost"
+        />
+        <button onClick={hundleSubmit} className="submit__btn">
+          Add
+        </button>
       </div>
     </div>
   );

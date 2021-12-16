@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./serach.css";
 import { useNavigate } from "react-router-dom";
-function Search() {
+// Take in a component as argument WrappedComponent
+// And return another compo(nent
+function HigherOrderSearch() {
   const navigate = useNavigate();
   let names = [
     "bitcoin",
@@ -109,7 +111,7 @@ function Search() {
   let sortedNames = names.sort();
 
   //reference
-  let input = document.getElementById("input");
+  let input = document.getElementById("inputtest");
   //Execute function on keyup
   if (input) {
     input.addEventListener("keyup", (e) => {
@@ -130,9 +132,8 @@ function Search() {
           listItem.style.cursor = "pointer";
           listItem.onclick = function () {
             console.log(i);
-            // input.value = "";
+            input.value = i;
             removeElements();
-            navigate(`/coins/${i}`);
           };
 
           //Display matched part in bold
@@ -140,7 +141,7 @@ function Search() {
           word += i.substr(input.value.length);
           //display the value in array
           listItem.innerHTML = word;
-          document.querySelector(".list").appendChild(listItem);
+          document.querySelector(".listtest").appendChild(listItem);
           console.log(listItem);
         }
       }
@@ -167,12 +168,12 @@ function Search() {
         }}
       >
         <div>
-          <input type="text" id="input" placeholder="Ex. bitcoin" />
+          <input type="text" id="inputtest" placeholder="Ex. bitcoin" />
         </div>
-        <ul className="list"></ul>
+        <ul className="listtest"></ul>
       </form>
     </div>
   );
 }
 
-export default Search;
+export default HigherOrderSearch;

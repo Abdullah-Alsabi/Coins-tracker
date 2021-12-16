@@ -22,7 +22,7 @@ function Coin() {
       .catch((err) => {
         console.log(err);
       });
-  }, [Coindetails]);
+  }, [id]);
   console.log(Coindetails);
 
   function convertToInternationalCurrencySystem(labelValue) {
@@ -111,6 +111,16 @@ function Coin() {
           ) : null}
         </div>
       </div>
+
+      <img
+        className="mt-3 mb-2"
+        style={{ backgroundColor: "rgba(138, 138, 138, 0.102)" }}
+        src={"https://static.coinstats.app/sparks/" + id + "_1w.png"}
+        alt=""
+        height={"60vh"}
+        width={"200vw"}
+      />
+
       <div className="middleInfoDiv">
         <div className="topLeft">
           <span>Market Cap</span>

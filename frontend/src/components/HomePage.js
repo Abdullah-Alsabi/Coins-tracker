@@ -32,7 +32,7 @@ function HomePage() {
       <h2>Welcome to Coins Tracker</h2>
       {loading && <Loading />}
       <div className="container_table">
-        <Table bordered hover variant="light">
+        <Table striped bordered hover variant="light">
           <thead>
             <tr
               style={{
@@ -41,6 +41,7 @@ function HomePage() {
               }}
             >
               <th
+                className="onPhone"
                 style={{
                   borderTopLeftRadius: "0.6rem",
                   borderLeftWidth: "0px",
@@ -52,6 +53,7 @@ function HomePage() {
               <th>Price</th>
               <th>24h Change</th>
               <th
+                className="onPhone"
                 style={{
                   borderTopRightRadius: "0.6rem",
                   borderRightColor: "transparent",
@@ -65,23 +67,24 @@ function HomePage() {
             {topCoins.map((coin, index) => {
               return (
                 <tr>
-                  <td>
+                  <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <span>{index + 1}</span>
                     </Link>
                   </td>
                   <td>
                     <Link to={"/coins/" + coin.id}>
-                      <div className="d-flex justify-content-start align-items-center">
+                      <div className="d-flex justify-content-start align-items-center ">
                         <img
                           src={coin.icon}
-                          width={"40vw"}
-                          height={"40vh"}
+                          width={"35vw"}
+                          height={"35vh"}
                           alt={coin.id}
                         />
                         <span style={{ marginLeft: "1rem" }}>
-                          {coin.name}
-                          <span> • {coin.symbol}</span>
+                          <span className="onPhone">{coin.name}</span>
+                          <span className="onPhone">•</span>
+                          <span> {coin.symbol}</span>
                         </span>
                       </div>
                     </Link>
@@ -140,7 +143,7 @@ function HomePage() {
                       ) : null}
                     </Link>
                   </td>
-                  <td>
+                  <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <div>
                         <img

@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const usersRouter = require("./routers/UserRoutes");
 const portfolioRouter = require("./routers/PortfolioRoutes");
+const TransactionRoutes = require("./routers/TransactionRoutes");
 
 require("dotenv").config();
 // Mongoose Here
@@ -27,6 +28,8 @@ app.use(cookieParser());
 
 app.use("/users", usersRouter);
 app.use("/portfolio", portfolioRouter);
+app.use("/transactions", TransactionRoutes);
+
 app.use(notFound);
 app.use(errorHandler);
 // app.use("/authors", authorsRouter);

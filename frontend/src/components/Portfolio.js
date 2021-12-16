@@ -54,7 +54,7 @@ function Portfolio() {
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       <h2 className="mb-3"> Welcome to {Portfolio.portfolioName} portfolio</h2>
-      <Link to={"/addtransaction"}>
+      <Link to={`/portfolios/${id}/addtransaction/`}>
         <p
           style={{
             borderRadius: "0.3rem",

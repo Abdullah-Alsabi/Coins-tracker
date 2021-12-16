@@ -163,3 +163,11 @@ footer {
   color: rgb(124, 123, 123) !important;
   text-decoration: none;
 }
+@media only screen and (max-width: 767px) {
+  form {
+    width: 75vw;
+  }
+  .container_table {
+    border: none !important;
+  }
+}

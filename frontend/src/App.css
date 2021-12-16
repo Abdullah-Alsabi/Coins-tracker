@@ -36,7 +36,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  margin-right: 15%;
+  margin-right: 23.2%;
   bottom: 0;
 }
 .main-container {
@@ -51,7 +51,7 @@
   align-items: center;
   width: 48rem;
   border-radius: 0.6rem;
-  border: solid 1px black;
+
   margin-top: 3rem;
   position: relative;
   max-width: 95%;
@@ -152,5 +152,12 @@ a:hover {
     display: grid;
     grid-row: auto;
     grid-template-columns: 1fr;
+  }
+
+  .onPhone {
+    display: none;
+  }
+  .coinNamediv {
+    display: block !important;
   }
 }

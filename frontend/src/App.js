@@ -16,6 +16,7 @@ import Transaction from "./components/Transaction";
 import AddTransaction from "./components/AddTransaction";
 import EditTransaction from "./components/EditTransaction";
 import Search from "./components/Search";
+import HigherOrderSearch from "./components/HigherOrderSearch";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -33,25 +34,26 @@ function App() {
   return (
     <userStatus.Provider value={{ auth, setAuth }}>
       <div className="App">
-        <Router>
-          <NavBar />
-          <Routes>
-            <Route exact path="/" element={<HomePage />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
-            <Route path="/signin" element={<SignIn />}></Route>
-            <Route path="/coins" element={<Coins />}></Route>
-            <Route path="/portfolios" element={<AllPortfolios />}></Route>
-            <Route path="/portfolios/:id" element={<Portfolio />}></Route>
-            <Route path="/addportfolio" element={<AddPortfolio />}></Route>
-            <Route
-              path="/transactions/edit/:id"
-              element={<EditTransaction />}
-            ></Route>
-            <Route path="/addtransaction" element={<AddTransaction />}></Route>
-            <Route path="/coins/:id" element={<Coin />}></Route>
-            <Route path="/search" element={<Search />}></Route>
-          </Routes>
-        </Router>
+        <NavBar />
+
+        <Routes>
+          <Route exact path="/" element={<HomePage />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/coins" element={<Coins />}></Route>
+          <Route path="/portfolios" element={<AllPortfolios />}></Route>
+          <Route path="/portfolios/:id" element={<Portfolio />}></Route>
+          <Route path="/addportfolio" element={<AddPortfolio />}></Route>
+          <Route
+            path="/transactions/edit/:id"
+            element={<EditTransaction />}
+          ></Route>
+          <Route
+            path="/portfolios/:id/addtransaction"
+            element={<AddTransaction />}
+          ></Route>
+          <Route path="/coins/:id" element={<Coin />}></Route>
+        </Routes>
         <Footer />
       </div>
     </userStatus.Provider>
