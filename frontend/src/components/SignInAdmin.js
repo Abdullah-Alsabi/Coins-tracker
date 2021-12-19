@@ -23,7 +23,7 @@ function SignInAdmin() {
       setloading(true);
       const { data } = await axios.post("/admin/signin", admin, config);
       setAuth("admin");
-      navigate("/");
+      navigate("/admin");
       setloading(false);
     } catch (error) {
       setError(error.response.data.message);

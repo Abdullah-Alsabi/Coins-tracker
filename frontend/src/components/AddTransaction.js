@@ -21,19 +21,13 @@ function AddTransaction() {
   // I Forced the function component to update because the search doesn't work only after refresh
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
-  function getCookie(cname) {
-    var arrayb = document.cookie.split(";");
-    for (const item of arrayb) {
-      if (item.startsWith("jwt=")) {
-        return item.substr(4);
-      }
-    }
-  }
-  let token = getCookie("jwt");
-  setAuth(token === undefined ? false : true);
+
+  let token;
+  if (auth === "user") token = document.cookie.split("jwt=")[1];
+  console.log(auth);
   let userData;
-  if (token === undefined) return null;
-  else userData = JSON.parse(atob(token.split(".")[1]));
+  if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
+  console.log(userData.id._id);
 
   async function hundleSubmit(e) {
     e.preventDefault();
@@ -617,7 +611,10 @@ function AddTransaction() {
       item.remove();
     });
   }
-
+  if (auth === "none") {
+    navigate("./signin");
+    return null;
+  }
   return (
     <div>
       <div className="container d-flex flex-column align-items-center justify-content-center addTrans">

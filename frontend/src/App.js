@@ -17,6 +17,7 @@ import AddTransaction from "./components/AddTransaction";
 import EditTransaction from "./components/EditTransaction";
 import Search from "./components/Search";
 import SignInAdmin from "./components/SignInAdmin";
+import Admin from "./components/Admin";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -41,7 +42,7 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signinadmin" element={<SignInAdmin />}></Route>
-
+          <Route path="/admin" element={<Admin />}></Route>
           <Route path="/coins" element={<Coins />}></Route>
           <Route path="/portfolios" element={<AllPortfolios />}></Route>
           <Route path="/portfolios/:id" element={<Portfolio />}></Route>

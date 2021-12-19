@@ -19,7 +19,7 @@ function NavBar() {
 
   let userData;
   if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
-
+  console.log(auth);
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -47,9 +47,11 @@ function NavBar() {
               </Link>
             ) : null}
 
-            <div className="searchDiv">
-              <Search />
-            </div>
+            {auth !== "admin" ? (
+              <div className="searchDiv">
+                <Search />
+              </div>
+            ) : null}
             {auth === "user" ? (
               <div className="authDiv">
                 {" "}
@@ -75,7 +77,7 @@ function NavBar() {
               </div>
             ) : null}
             {auth === "admin" ? (
-              <div>
+              <div className="admin__div">
                 <Button
                   className="Link_Nav_signOut"
                   variant="danger"

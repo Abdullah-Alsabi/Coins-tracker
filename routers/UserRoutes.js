@@ -77,29 +77,30 @@ router.get("/signout", (req, res) => {
 
 // *************************
 
-//for admin
-// router.get("/Users", (req, res) => {
-//   Users.find()
-//     .then((data) => {
-//       res.json(data);
-//       console.log(data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+// for admin
+router.get("/getusers", (req, res) => {
+  Users.find()
+    .then((data) => {
+      res.json(data);
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //for admin
-// router.get("/Users/:id", (req, res) => {
-//   Users.findById(req.params.id)
-//     .then((data) => {
-//       res.json(data);
-//       console.log(data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+router.delete("/deleteuser/:id", (req, res) => {
+  console.log(req.params.id);
+  Users.findByIdAndDelete(req.params.id)
+    .then((data) => {
+      res.json(data);
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //update from admin user will use the same for user
 

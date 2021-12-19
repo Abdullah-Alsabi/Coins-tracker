@@ -122,6 +122,11 @@ a:hover {
   width: auto;
   left: -40vw;
 }
+.admin__div {
+  width: 70vw !important;
+  display: flex;
+  flex-direction: row-reverse;
+}
 @media only screen and (min-width: 1024px) {
   .authDiv {
     flex-direction: row;
@@ -136,13 +141,25 @@ a:hover {
   .Link_Nav_userWelcome {
     margin-right: 4%;
   }
+  .admin__div {
+    width: 70vw !important;
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
+
 @media only screen and (max-width: 1024px) {
   .portfolios {
     padding: 5%;
     display: grid;
     grid-row: auto;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .admin__div {
+    width: auto !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 }
 @media only screen and (min-width: 769px) and (max-width: 900px) {
@@ -151,6 +168,12 @@ a:hover {
     display: grid;
     grid-row: auto;
     grid-template-columns: 1fr 1fr;
+  }
+  .admin__div {
+    width: auto !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -166,7 +189,12 @@ a:hover {
     grid-row: auto;
     grid-template-columns: 1fr;
   }
-
+  .admin__div {
+    width: auto !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   .onPhone {
     display: none;
   }

@@ -9,23 +9,12 @@ function AddPortfolio() {
   const [portfolio, setPortfolio] = useState({});
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
-  
 
-  function getCookie(cname) {
-    var arrayb = document.cookie.split(";");
-    for (const item of arrayb) {
-      if (item.startsWith("jwt=")) {
-        return item.substr(4);
-      }
-    }
-  }
-  let token = getCookie("jwt");
-  setAuth(token === undefined ? false : true);
+  let token;
+  if (auth === "user") token = document.cookie.split("jwt=")[1];
   console.log(auth);
   let userData;
-  if (token === undefined) return null;
-  else userData = JSON.parse(atob(token.split(".")[1]));
-
+  if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
   console.log(userData.id._id);
 
   async function hundleSubmit(e) {
@@ -44,14 +33,16 @@ function AddPortfolio() {
         portfolio,
         config
       );
-      setAuth(true);
       navigate("/portfolios");
       setloading(false);
     } catch (error) {
       setloading(false);
     }
   }
-
+  if (auth === "none") {
+    navigate("./signin");
+    return null;
+  }
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       {loading && <Loading />}

@@ -15,19 +15,9 @@ function Portfolio() {
   let { auth, setAuth } = useContext(userStatus);
   const [coins, setcoins] = useState([]);
   const navigate = useNavigate();
-
-  function getCookie(cname) {
-    var arrayb = document.cookie.split(";");
-    for (const item of arrayb) {
-      if (item.startsWith("jwt=")) {
-        return item.substr(4);
-      }
-    }
-  }
-
-  let token = getCookie("jwt");
-  setAuth(token === undefined ? false : true);
-
+  let token;
+  if (auth === "user") token = document.cookie.split("jwt=")[1];
+  console.log(auth);
   let userData;
   let data;
   //user id from cookie
@@ -35,8 +25,11 @@ function Portfolio() {
   useEffect(() => {
     // setloading(false);
     // i have to send the user id throgh the body
-    if (token === undefined) return null;
-    else userData = JSON.parse(atob(token.split(".")[1]));
+    if (auth === "none") {
+      navigate("./signin");
+      return null;
+    }
+    userData = JSON.parse(atob(token.split(".")[1]));
     data = { userId: userData.id._id };
     axios
       .post("/portfolio/getportfolio/" + id, data)
@@ -109,9 +102,9 @@ function Portfolio() {
             axios
               .post("/portfolio/deleteportfolio/" + id, data)
               .then((res) => {
-                setloading(false);
                 setTimeout(() => {
                   navigate("/portfolios");
+                  setloading(false);
                 }, 1000);
               })
               .catch((err) => {

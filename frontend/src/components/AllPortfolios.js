@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import axios from "axios";
@@ -9,25 +10,19 @@ function AllPortfolios() {
   const [AllPortfolios, setAllPortfolios] = useState([]);
   const [loading, setloading] = useState(true);
   let { auth, setAuth } = useContext(userStatus);
-
-  function getCookie(cname) {
-    var arrayb = document.cookie.split(";");
-    for (const item of arrayb) {
-      if (item.startsWith("jwt=")) {
-        return item.substr(4);
-      }
-    }
-  }
-  let token = getCookie("jwt");
-  setAuth(token === undefined ? false : true);
+  const navigate = useNavigate();
+  let token;
+  if (auth === "user") token = document.cookie.split("jwt=")[1];
   console.log(auth);
   let userData;
   let data;
   //user id from cookie
 
   useEffect(() => {
-    if (token === undefined) return null;
-    else userData = JSON.parse(atob(token.split(".")[1]));
+    if (auth === "none") {
+      navigate("./signin");
+      return null;
+    } else userData = JSON.parse(atob(token.split(".")[1]));
     data = { userId: userData.id._id };
     axios
       .get("/portfolio/getportfolios/" + userData.id._id)
