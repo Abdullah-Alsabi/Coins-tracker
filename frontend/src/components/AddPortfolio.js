@@ -9,6 +9,7 @@ function AddPortfolio() {
   const [portfolio, setPortfolio] = useState({});
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
+  
 
   function getCookie(cname) {
     var arrayb = document.cookie.split(";");

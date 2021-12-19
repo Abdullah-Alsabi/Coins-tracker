@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // And return another compo(nent
 function HigherOrderSearch() {
   const navigate = useNavigate();
-  let names = [
+  let names2 = [
     "bitcoin",
     "ethereum",
     "binance-coin",
@@ -108,7 +108,7 @@ function HigherOrderSearch() {
     "iotex",
   ];
 
-  let sortedNames = names.sort();
+  let sortedNames = names2.sort();
 
   //reference
   let input = document.getElementById("inputtest");
@@ -128,7 +128,7 @@ function HigherOrderSearch() {
           //create li element
           let listItem = document.createElement("li");
           //One common class name
-          listItem.classList.add("list-items");
+          listItem.classList.add("list-itemstest");
           listItem.style.cursor = "pointer";
           listItem.onclick = function () {
             console.log(i);
@@ -153,7 +153,7 @@ function HigherOrderSearch() {
   }
   function removeElements() {
     //clear all the item
-    let items = document.querySelectorAll(".list-items");
+    let items = document.querySelectorAll(".list-itemstest");
     items.forEach((item) => {
       item.remove();
     });
@@ -161,7 +161,7 @@ function HigherOrderSearch() {
   return (
     <div>
       <form
-        className="searchform"
+        className="searchformtest"
         autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault();

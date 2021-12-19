@@ -32,7 +32,13 @@ function HomePage() {
       <h2>Welcome to Coins Tracker</h2>
       {loading && <Loading />}
       <div className="container_table">
-        <Table striped bordered hover variant="light">
+        <Table
+          striped
+          bordered
+          hover
+          variant="light"
+         className="table__css"
+        >
           <thead>
             <tr
               style={{

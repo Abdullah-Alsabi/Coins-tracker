@@ -39,7 +39,7 @@ function Coins() {
       <h2>Welcome to Coins Tracker</h2>
       {loading && <Loading />}
       <div className="container_table">
-        <Table striped bordered hover variant="light">
+        <Table className="table__css" striped bordered hover variant="light">
           <thead>
             <tr
               style={{

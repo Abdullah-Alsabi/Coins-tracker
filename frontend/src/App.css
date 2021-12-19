@@ -5,6 +5,9 @@
 .App {
   text-align: center;
 }
+.allButFooter {
+  min-height: calc(100vh - 95px);
+}
 
 /* NavBar css */
 .continer__NavBar {
@@ -109,6 +112,16 @@ a:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+.Portfolio__card {
+  z-index: -1 !important;
+}
+
+.search__css {
+  position: absolute;
+  z-index: 1000 !important;
+  width: auto;
+  left: -40vw;
+}
 @media only screen and (min-width: 1024px) {
   .authDiv {
     flex-direction: row;
@@ -132,7 +145,7 @@ a:hover {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 900px) {
+@media only screen and (min-width: 769px) and (max-width: 900px) {
   .portfolios {
     padding: 5%;
     display: grid;
@@ -140,7 +153,7 @@ a:hover {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .authDiv {
     display: flex;
     flex-direction: column;
@@ -156,6 +169,9 @@ a:hover {
 
   .onPhone {
     display: none;
+  }
+  .columnBtns {
+    flex-direction: column !important;
   }
   .coinNamediv {
     display: block !important;

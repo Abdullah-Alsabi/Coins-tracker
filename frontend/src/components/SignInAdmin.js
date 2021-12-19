@@ -1,18 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { Row, Col } from "react-bootstrap";
 import "./signin-signup-nav-footer.css";
 import userStatus from "../utils/userStatus";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
-
-function SignUp() {
-  const navigate = useNavigate();
+function SignInAdmin() {
   let { auth, setAuth } = useContext(userStatus);
-  const [user, setUser] = useState({});
+  const [admin, setAdmin] = useState({});
   const [error, setError] = useState(false);
   const [loading, setloading] = useState(false);
+  const navigate = useNavigate();
+
   async function hundleSubmit(e) {
     e.preventDefault();
     try {
@@ -22,8 +21,8 @@ function SignUp() {
         },
       };
       setloading(true);
-      const { data } = await axios.post("/users/signup", user, config);
-      setAuth("user");
+      const { data } = await axios.post("/admin/signin", admin, config);
+      setAuth("admin");
       navigate("/");
       setloading(false);
     } catch (error) {
@@ -37,49 +36,31 @@ function SignUp() {
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {loading && <Loading />}
       <form onSubmit={hundleSubmit}>
-        <h2>sign up</h2>
-        <label>User Name</label>
+        <h2>sign in for admin</h2>
+        <label>Admin User Name</label>
         <input
           type="text"
           onChange={(e) => {
-            user.userName = e.target.value;
-            setUser({ ...user });
+            admin.userName = e.target.value;
+            setAdmin({ ...admin });
           }}
           name="userName"
-          required
-        />
-        <label>Email</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            user.email = e.target.value;
-            setUser({ ...user });
-          }}
-          name="email"
           required
         />
         <label>Password</label>
         <input
           type="password"
           onChange={(e) => {
-            user.password = e.target.value;
-            setUser({ ...user });
+            admin.password = e.target.value;
+            setAdmin({ ...admin });
           }}
           name="password"
           required
         />
-        <button className="submit__btn">Sign up</button>
-        <Row className="mt-3">
-          <Col>
-            Have an account?{" "}
-            <Link className="Link" to="/signin">
-              Signin
-            </Link>
-          </Col>
-        </Row>
+        <button className="submit__btn">Sign in</button>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default SignInAdmin;

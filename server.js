@@ -8,7 +8,7 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const usersRouter = require("./routers/UserRoutes");
 const portfolioRouter = require("./routers/PortfolioRoutes");
 const TransactionRoutes = require("./routers/TransactionRoutes");
-
+const AdminRoutes = require("./routers/AdminRoutes");
 require("dotenv").config();
 // Mongoose Here
 const uri = process.env.ATLAS_URI;
@@ -29,6 +29,7 @@ app.use(cookieParser());
 app.use("/users", usersRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/transactions", TransactionRoutes);
+app.use("/admin", AdminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -23,7 +23,7 @@ function SignIn() {
       };
       setloading(true);
       const { data } = await axios.post("/users/signin", user, config);
-      setAuth(true);
+      setAuth("user");
       navigate("/");
       setloading(false);
     } catch (error) {

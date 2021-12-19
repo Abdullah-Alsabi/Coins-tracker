@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./signin-signup-nav-footer.css"
 const Footer = () => {
   let Year = new Date().getFullYear();
 
@@ -13,3 +13,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

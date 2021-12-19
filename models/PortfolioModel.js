@@ -15,20 +15,7 @@ let PortfolioSchema = new Schema({
   },
   transactions: {
     type: [TransactionSchema],
-    default: [
-      {
-        coinName: "bitcoin",
-        tranType: "sell",
-        tranAmount: 0.5,
-        tranPrice: 40000,
-      },
-      {
-        coinName: "bitcoin",
-        tranType: "sell",
-        tranAmount: 0.5,
-        tranPrice: 40000,
-      },
-    ],
+    default: [],
   },
 });
 

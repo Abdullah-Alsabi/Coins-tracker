@@ -7,6 +7,7 @@ import { AiOutlineCaretUp } from "react-icons/ai";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 function Coin() {
+  // id is coin name
   const { id } = useParams();
   const [Coindetails, setCoindetails] = useState({});
   const [loading, setloading] = useState(true);

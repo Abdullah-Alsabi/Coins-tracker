@@ -9,24 +9,17 @@ import Search from "./Search";
 function NavBar() {
   let { auth, setAuth } = useContext(userStatus);
 
-  function getCookie(cname) {
-    var arrayb = document.cookie.split(";");
-    for (const item of arrayb) {
-      if (item.startsWith("jwt=")) {
-        return item.substr(4);
-      }
-    }
-  }
-  let token = getCookie("jwt");
-  setAuth(token === undefined ? false : true);
-  console.log(auth);
+  let token = document.cookie.split("jwt=")[1];
+  let tokenadmin = document.cookie.split("jwtadmin=")[1];
+  if (tokenadmin) {
+    setAuth("admin");
+  } else if (token) {
+    setAuth("user");
+  } else setAuth("none");
+
   let userData;
-  if (
-    token === undefined
-      ? null
-      : (userData = JSON.parse(atob(token.split(".")[1])))
-  )
-    console.log(userData.id.userName);
+  if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -38,30 +31,26 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto d-flex ">
-            {!auth ? (
+            {auth === "none" ? (
               <Link className="Link_Nav" to="/Signup">
                 Signup
               </Link>
             ) : null}
-            {!auth ? (
+            {auth === "none" ? (
               <Link className="Link_Nav" to="/Signin">
                 signin
               </Link>
             ) : null}
-            {auth ? (
+            {auth === "user" ? (
               <Link className="Link_Nav" to="/portfolios">
                 My portfolios
               </Link>
             ) : null}
-            {auth ? (
-              <Link className="Link_Nav" to="/addportfolio">
-                Add portfolio
-              </Link>
-            ) : null}
+
             <div className="searchDiv">
               <Search />
             </div>
-            {auth ? (
+            {auth === "user" ? (
               <div className="authDiv">
                 {" "}
                 <h6 className="Link_Nav_userWelcome">
@@ -74,7 +63,27 @@ function NavBar() {
                     axios
                       .get("/users/signout")
                       .then((res) => {
-                        setAuth(false);
+                        setAuth("none");
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  signout
+                </Button>
+              </div>
+            ) : null}
+            {auth === "admin" ? (
+              <div>
+                <Button
+                  className="Link_Nav_signOut"
+                  variant="danger"
+                  onClick={() => {
+                    axios
+                      .get("/admin/signout")
+                      .then((res) => {
+                        setAuth("none");
                       })
                       .catch((err) => {
                         console.log(err);

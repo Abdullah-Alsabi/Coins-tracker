@@ -13,6 +13,7 @@ function Portfolio() {
   const [Portfolio, setPortfolio] = useState({});
   const [loading, setloading] = useState(true);
   let { auth, setAuth } = useContext(userStatus);
+  const [coins, setcoins] = useState([]);
   const navigate = useNavigate();
 
   function getCookie(cname) {
@@ -26,7 +27,7 @@ function Portfolio() {
 
   let token = getCookie("jwt");
   setAuth(token === undefined ? false : true);
-  console.log(auth);
+
   let userData;
   let data;
   //user id from cookie
@@ -41,59 +42,96 @@ function Portfolio() {
       .post("/portfolio/getportfolio/" + id, data)
       .then((res) => {
         setPortfolio(res.data);
-        console.log(res.data);
+
+        res.data.transactions.map(async (t) => {
+          let d = await axios
+            .get(
+              "https://api.coinstats.app/public/v1/coins/" +
+                t.coinName +
+                "?currency=USD"
+            )
+            .then((res) => {
+              let my_object = {};
+              my_object.coin = res.data;
+              my_object.trans = t;
+
+              my_object.total = parseFloat(
+                res.data.coin.price * t.tranAmount -
+                  t.tranAmount * t.tranPrice +
+                  t.tranAmount * t.tranPrice
+              ).toFixed(2);
+
+              coins.push(my_object);
+
+              setloading(false);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          setcoins(await Promise.all(coins));
+
+          return t.coinName;
+        });
+
         setloading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
   console.log(Portfolio);
+  console.log(coins);
+
   if (loading) return <Loading />;
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       <h2 className="mb-3"> Welcome to {Portfolio.portfolioName} portfolio</h2>
-      <Link to={`/portfolios/${id}/addtransaction/`}>
-        <p
+      <div className="container d-flex flex-row align-items-center justify-content-between columnBtns ">
+        <Link to={`/portfolios/${id}/addtransaction/`}>
+          <p
+            style={{
+              borderRadius: "0.3rem",
+              color: "#444",
+            }}
+            className="mt-3 p-2 addTransaction"
+          >
+            Add Transaction
+          </p>
+        </Link>
+
+        <button
+          onClick={() => {
+            setloading(true);
+            // i have to send the user id throgh the body
+            if (token === undefined) return null;
+            else userData = JSON.parse(atob(token.split(".")[1]));
+            data = { userId: userData.id._id };
+            axios
+              .post("/portfolio/deleteportfolio/" + id, data)
+              .then((res) => {
+                setloading(false);
+                setTimeout(() => {
+                  navigate("/portfolios");
+                }, 1000);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
           style={{
             borderRadius: "0.3rem",
             color: "#444",
           }}
-          className="mt-3 p-2 addTransaction"
+          className="mt-3 mb-3 p-2 DeletePortfolio"
         >
-          Add Transaction
-        </p>
-      </Link>
-
-      <button
-        onClick={() => {
-          setloading(true);
-          // i have to send the user id throgh the body
-          if (token === undefined) return null;
-          else userData = JSON.parse(atob(token.split(".")[1]));
-          data = { userId: userData.id._id };
-          axios
-            .post("/portfolio/deleteportfolio/" + id, data)
-            .then((res) => {
-              setloading(false);
-              navigate("/portfolios");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-        style={{
-          borderRadius: "0.3rem",
-          color: "#444",
-        }}
-        className="mt-3 mb-3 p-2 DeletePortfolio"
-      >
-        Delete Portfolio
-      </button>
-
+          Delete Portfolio
+        </button>
+      </div>
       <div>
-        <Card className="mb-3" style={{ width: "18rem", height: "100%" }}>
+        <Card
+          className="mb-3 Portfolio__card"
+          style={{ width: "18rem", height: "100%" }}
+        >
           <Card.Body>
             <Card.Title>{Portfolio.portfolioName}</Card.Title>
             <Card.Text>
@@ -105,7 +143,7 @@ function Portfolio() {
       <div className="Transaction__Table">
         <h4>Holdings</h4>
         {Portfolio.transactions.length > 0 ? (
-          <Table bordered hover variant="light">
+          <Table className="table__css" bordered hover variant="light">
             <thead>
               <tr
                 style={{
@@ -135,28 +173,78 @@ function Portfolio() {
               </tr>
             </thead>
             <tbody>
-              {" "}
-              {Portfolio.transactions.map((t, index) => {
+              {coins.map((c) => {
                 return (
                   <tr>
                     <td>
                       <Link to={"/coins/"}>
-                        <span>{t.coinName}</span>
+                        <span>{c.trans.coinName}</span>
                       </Link>
                     </td>
                     <td>
                       <Link to={"/coins/"}>
-                        <span>{t.tranAmount}</span>
+                        <span>{c.trans.tranAmount}</span>
                       </Link>
                     </td>
                     <td>
                       <Link to={"/coins/"}>
-                        <span>{t.tranPrice}</span>
+                        <span>
+                          $
+                          {c.coin.coin.price < 0.1
+                            ? parseFloat(c.coin.coin.price).toFixed(5)
+                            : parseFloat(c.coin.coin.price).toFixed(2)}
+                        </span>
                       </Link>
                     </td>
                     <td>
                       <Link to={"/coins/"}>
-                        <span>{t.tranType}</span>
+                        <span>
+                          {c.trans.tranType} ● {c.total}{" "}
+                        </span>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={"/coins/" + c.id}>
+                        {c.coin.coin.priceChange1d > 0 ? (
+                          <span
+                            style={{
+                              background: "rgba(52,199,89,0.15)",
+                              color: "#34c759",
+                              borderRadius: "0.3rem",
+                              padding: "1%",
+                            }}
+                          >
+                            <i className="icon-priceUp">
+                              <AiOutlineCaretUp />{" "}
+                            </i>
+                            {c.coin.coin.priceChange1d}
+                          </span>
+                        ) : c.coin.coin.priceChange1d === 0 ? (
+                          <span
+                            style={{
+                              borderRadius: "0.3rem",
+                              background: "#E0E0E0",
+                              color: "#A9A9A9",
+                              padding: "1%",
+                            }}
+                          >
+                            {c.coin.coin.priceChange1d}
+                          </span>
+                        ) : c.coin.coin.priceChange1d < 0 ? (
+                          <span
+                            style={{
+                              borderRadius: "0.3rem",
+                              padding: "1%",
+                              background: "rgba(255,53,53,0.15)",
+                              color: "#ff3535",
+                            }}
+                          >
+                            <i className="icon-priceDown">
+                              <AiOutlineCaretDown />{" "}
+                            </i>
+                            {c.coin.coin.priceChange1d * -1}
+                          </span>
+                        ) : null}
                       </Link>
                     </td>
                   </tr>

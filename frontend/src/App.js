@@ -16,7 +16,7 @@ import Transaction from "./components/Transaction";
 import AddTransaction from "./components/AddTransaction";
 import EditTransaction from "./components/EditTransaction";
 import Search from "./components/Search";
-import HigherOrderSearch from "./components/HigherOrderSearch";
+import SignInAdmin from "./components/SignInAdmin";
 function App() {
   let [auth, setAuth] = useState(false);
 
@@ -33,13 +33,15 @@ function App() {
   // const value = token;
   return (
     <userStatus.Provider value={{ auth, setAuth }}>
-      <div className="App">
+      <div className="App allButFooter">
         <NavBar />
 
         <Routes>
           <Route exact path="/" element={<HomePage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/signinadmin" element={<SignInAdmin />}></Route>
+
           <Route path="/coins" element={<Coins />}></Route>
           <Route path="/portfolios" element={<AllPortfolios />}></Route>
           <Route path="/portfolios/:id" element={<Portfolio />}></Route>
@@ -54,8 +56,8 @@ function App() {
           ></Route>
           <Route path="/coins/:id" element={<Coin />}></Route>
         </Routes>
-        <Footer />
       </div>
+      <Footer />
     </userStatus.Provider>
   );
 }

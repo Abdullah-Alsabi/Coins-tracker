@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const userStatus = createContext({
-  auth: false,
+  auth: "none",
   setAuth: (a) => {},
 });
 

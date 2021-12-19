@@ -15,8 +15,7 @@ p,
 input,
 label,
 button,
-div,
-footer {
+div {
   margin: 0;
   padding: 0;
   font-family: "Quicksand", sans-serif;
@@ -125,31 +124,6 @@ header .btn {
   display: inline-block;
   font-size: 0.8em;
 }
-.recipes {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 30px;
-  row-gap: 80px;
-  margin: 80px AUTO;
-  max-width: 1200px;
-}
-.recipe {
-  display: inline-block;
-  border-radius: 20px;
-  background: white;
-  position: relative;
-  text-align: center;
-  padding: 0 20px 30px 20px;
-}
-.recipe img {
-  width: 100px;
-  margin: -30px auto 20px;
-}
-footer {
-  text-align: center;
-  margin-top: 120px;
-  color: #aaa;
-}
 
 .submit__btn {
   margin-top: 5%;
@@ -162,6 +136,12 @@ footer {
 .Link:hover {
   color: rgb(124, 123, 123) !important;
   text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  height: 40px;
+  color: #aaa;
 }
 @media only screen and (max-width: 767px) {
   form {

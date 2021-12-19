@@ -45,6 +45,17 @@ function AllPortfolios() {
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       All portfolios
+      <Link to={`/addportfolio`}>
+        <p
+          style={{
+            borderRadius: "0.3rem",
+            color: "#444",
+          }}
+          className="mt-3 p-2 addTransaction"
+        >
+          Add Portfolio
+        </p>
+      </Link>
       <div className="portfolios">
         {AllPortfolios.map((p) => {
           return (
