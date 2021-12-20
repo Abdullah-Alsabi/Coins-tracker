@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-let PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
@@ -13,13 +13,13 @@ const AdminRoutes = require("./routers/AdminRoutes");
 require("dotenv").config();
 // Mongoose Here
 
-mongoose
-  .connect(process.env.ATLAS_URI)
-  .then(() => console.log("DB Connected"))
-  .catch((err) => console.log("DB Error"));
-
+mongoose.connect(process.env.ATLAS_URI, {});
 // msg when connect
 
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 // connect frontend
 app.use(cors());
 app.use(express.json());
@@ -38,6 +38,6 @@ app.use(errorHandler);
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend/build/index.html"));
 });
-app.listen(PORT, () => {
-  console.log(`Connected on= http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Connected on= http://localhost:${port}`);
 });
