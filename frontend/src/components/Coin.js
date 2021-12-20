@@ -12,8 +12,8 @@ function Coin() {
   const [Coindetails, setCoindetails] = useState({});
   const [loading, setloading] = useState(true);
 
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    let d = await axios
       .get("https://api.coinstats.app/public/v1/coins/" + id + "?currency=USD")
       .then((res) => {
         console.log(res.data.coin);

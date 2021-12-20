@@ -13,7 +13,7 @@ function SignIn() {
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
-  async function hundleSubmit(e) {
+  function hundleSubmit(e) {
     e.preventDefault();
     try {
       const config = {
@@ -22,7 +22,7 @@ function SignIn() {
         },
       };
       setloading(true);
-      const { data } = await axios.post("/users/signin", user, config);
+      axios.post("/users/signin", user, config);
       setAuth("user");
       navigate("/");
       setloading(false);
