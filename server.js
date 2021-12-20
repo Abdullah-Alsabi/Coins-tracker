@@ -26,6 +26,7 @@ connection.once("open", () => {
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static("frontend/build"));
 
 app.use("/users", usersRouter);
 app.use("/portfolio", portfolioRouter);
@@ -36,7 +37,6 @@ app.use(notFound);
 app.use(errorHandler);
 // app.use("/authors", authorsRouter);
 
-app.use(express.static("frontend/build"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend/build/index.html"));
 });
