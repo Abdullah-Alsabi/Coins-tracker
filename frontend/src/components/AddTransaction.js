@@ -611,8 +611,8 @@ function AddTransaction() {
       item.remove();
     });
   }
-  if (auth === "none") {
-    navigate("./signin");
+  if (auth !== "user") {
+    navigate("/signin");
     return null;
   }
   return (

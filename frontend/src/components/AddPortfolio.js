@@ -39,8 +39,8 @@ function AddPortfolio() {
       setloading(false);
     }
   }
-  if (auth === "none") {
-    navigate("./signin");
+  if (auth !== "user") {
+    navigate("/signin");
     return null;
   }
   return (

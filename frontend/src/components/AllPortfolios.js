@@ -19,8 +19,8 @@ function AllPortfolios() {
   //user id from cookie
 
   useEffect(() => {
-    if (auth === "none") {
-      navigate("./signin");
+    if (auth !== "user") {
+      navigate("/signin");
       return null;
     } else userData = JSON.parse(atob(token.split(".")[1]));
     data = { userId: userData.id._id };

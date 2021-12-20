@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import "../App.css";
@@ -8,6 +8,7 @@ import Logo from "../images/Logo.png";
 import Search from "./Search";
 function NavBar() {
   let { auth, setAuth } = useContext(userStatus);
+  const navigate = useNavigate();
 
   let token = document.cookie.split("jwt=")[1];
   let tokenadmin = document.cookie.split("jwtadmin=")[1];
@@ -46,6 +47,11 @@ function NavBar() {
                 My portfolios
               </Link>
             ) : null}
+            {auth === "admin" ? (
+              <Link className="Link_Nav" to="/admin">
+                Admin
+              </Link>
+            ) : null}
 
             {auth !== "admin" ? (
               <div className="searchDiv">
@@ -55,7 +61,10 @@ function NavBar() {
             {auth === "user" ? (
               <div className="authDiv">
                 {" "}
-                <h6 className="Link_Nav_userWelcome">
+                <h6
+                  onClick={() => navigate("/profile")}
+                  className="Link_Nav_userWelcome"
+                >
                   Welcome {userData.id.userName}{" "}
                 </h6>{" "}
                 <Button
@@ -66,6 +75,7 @@ function NavBar() {
                       .get("/users/signout")
                       .then((res) => {
                         setAuth("none");
+                        navigate("/");
                       })
                       .catch((err) => {
                         console.log(err);
@@ -86,6 +96,7 @@ function NavBar() {
                       .get("/admin/signout")
                       .then((res) => {
                         setAuth("none");
+                        navigate("/");
                       })
                       .catch((err) => {
                         console.log(err);

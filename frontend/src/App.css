@@ -127,6 +127,15 @@ a:hover {
   display: flex;
   flex-direction: row-reverse;
 }
+@media only screen and (min-width: 1800px) {
+  .search__css {
+    position: absolute;
+    z-index: 1000 !important;
+    width: auto;
+    left: -35vw;
+  }
+}
+
 @media only screen and (min-width: 1024px) {
   .authDiv {
     flex-direction: row;
@@ -140,6 +149,9 @@ a:hover {
   }
   .Link_Nav_userWelcome {
     margin-right: 4%;
+  }
+  .Link_Nav_userWelcome:hover {
+    cursor: pointer;
   }
   .admin__div {
     width: 70vw !important;
@@ -203,5 +215,13 @@ a:hover {
   }
   .coinNamediv {
     display: block !important;
+  }
+}
+@media only screen and (min-width: 1800px) {
+  .search__css {
+    position: absolute;
+    z-index: 1000 !important;
+    width: auto;
+    left: -35vw;
   }
 }

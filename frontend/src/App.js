@@ -18,8 +18,9 @@ import EditTransaction from "./components/EditTransaction";
 import Search from "./components/Search";
 import SignInAdmin from "./components/SignInAdmin";
 import Admin from "./components/Admin";
+import Profile from "./components/Profile";
 function App() {
-  let [auth, setAuth] = useState(false);
+  let [auth, setAuth] = useState("none");
 
   // function getCookie(cname) {
   //   var arrayb = document.cookie.split(";");
@@ -41,6 +42,7 @@ function App() {
           <Route exact path="/" element={<HomePage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/signinadmin" element={<SignInAdmin />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/coins" element={<Coins />}></Route>

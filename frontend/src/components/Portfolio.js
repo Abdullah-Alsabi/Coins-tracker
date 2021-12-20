@@ -25,7 +25,7 @@ function Portfolio() {
   useEffect(() => {
     // setloading(false);
     // i have to send the user id throgh the body
-    if (auth === "none") {
+    if (auth !== "user") {
       navigate("./signin");
       return null;
     }

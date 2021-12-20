@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./serach.css";
 import { useNavigate } from "react-router-dom";
+
 function Search() {
   const navigate = useNavigate();
+  // I Forced the function component to update because the search doesn't work only after refresh
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
   let names = [
     {
       icon: "https://static.coinstats.app/coins/Bitcoin6l39t.png",
@@ -564,6 +568,7 @@ function Search() {
       <form
         className="searchform search__css"
         autoComplete="off"
+        onClick={forceUpdate}
         onSubmit={(e) => {
           e.preventDefault();
         }}
