@@ -12,16 +12,14 @@ const TransactionRoutes = require("./routers/TransactionRoutes");
 const AdminRoutes = require("./routers/AdminRoutes");
 require("dotenv").config();
 // Mongoose Here
-const uri = process.env.ATLAS_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose
+  .connect(process.env.ATLAS_URI)
+  .then(() => console.log("DB Connected"))
+  .catch((err) => console.log("DB Error"));
 
 // msg when connect
 
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-});
 // connect frontend
 app.use(cors());
 app.use(express.json());
