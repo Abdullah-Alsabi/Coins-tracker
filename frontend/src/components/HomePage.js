@@ -32,13 +32,7 @@ function HomePage() {
       <h2>Welcome to Coins Tracker</h2>
       {loading && <Loading />}
       <div className="container_table">
-        <Table
-          striped
-          bordered
-          hover
-          variant="light"
-         className="table__css"
-        >
+        <Table striped bordered hover variant="light" className="table__css">
           <thead>
             <tr
               style={{
@@ -72,7 +66,7 @@ function HomePage() {
           <tbody>
             {topCoins.map((coin, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <span>{index + 1}</span>

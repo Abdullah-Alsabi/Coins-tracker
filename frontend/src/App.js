@@ -36,8 +36,6 @@ function App() {
   return (
     <userStatus.Provider value={{ auth, setAuth }}>
       <div className="App allButFooter">
-        <NavBar />
-
         <Routes>
           <Route exact path="/" element={<HomePage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>

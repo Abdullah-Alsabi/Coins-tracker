@@ -72,7 +72,7 @@ function Coins() {
           <tbody>
             {AllCoins.map((coin, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td className="onPhone">
                     <Link to={"/coins/" + coin.id}>
                       <span>{index + 1}</span>
