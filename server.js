@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
@@ -12,8 +12,10 @@ const TransactionRoutes = require("./routers/TransactionRoutes");
 const AdminRoutes = require("./routers/AdminRoutes");
 require("dotenv").config();
 // Mongoose Here
+const uri = process.env.ATLAS_URI;
 
-mongoose.connect(process.env.ATLAS_URI, {});
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 // msg when connect
 
 const connection = mongoose.connection;
@@ -24,7 +26,6 @@ connection.once("open", () => {
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static("frontend/build"));
 
 app.use("/users", usersRouter);
 app.use("/portfolio", portfolioRouter);
@@ -35,9 +36,10 @@ app.use(notFound);
 app.use(errorHandler);
 // app.use("/authors", authorsRouter);
 
+app.use(express.static("frontend/build"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend/build/index.html"));
 });
-app.listen(port, () => {
-  console.log(`Connected on= http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Connected on= http://localhost:${PORT}`);
 });
