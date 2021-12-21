@@ -174,7 +174,6 @@ Admin model
 
 | HTTP Method | URL   | Request Body    | Success status | Error Status | Description  |
 | ----------- | -------------- | ---------------------------------------------------- | -------------- | ------------ | ------------------------------------------- |
-
 | POST | `/users/signup` | {userName, email, password} | 200 | 404 | Checks if fields not empty and user not exists (404), then create user with encrypted password, and store user in cookie |
 | POST  | `/users/signin`  | {username, password} | 200  | 404 | Checks if fields not empty, if user exists (404), and if password matches (404), then stores user in cookie |
 | GET  | `/users/signout` | (empty)    | 200     | 404    | Logs out the user           |
@@ -192,6 +191,7 @@ Admin model
 | POST | `/admin/signup` | {userName, email, password} | 200 | 404 | Checks if fields not empty and admin not exists (404), then create Admin with encrypted password, and store admin in cookie |
 | POST | `/admin/signin`  | {username, password}  | 200  | 404  | Checks if fields not empty, if admin exists (404), and if password matches (404), then stores admin in cookie |
 | GET        | `/admin/signout` | (empty)            | 200            | 404          | Logs out the admin     |
+
 ### Links
 
 
