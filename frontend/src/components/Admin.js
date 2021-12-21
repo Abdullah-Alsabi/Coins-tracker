@@ -17,7 +17,7 @@ function Admin() {
     axios
       .get("/users/getusers")
       .then((res) => {
-        console.log(res.data);
+       
         setusers(res.data);
         setloading(false);
       })

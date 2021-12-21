@@ -12,10 +12,10 @@ function AddPortfolio() {
 
   let token;
   if (auth === "user") token = document.cookie.split("jwt=")[1];
-  console.log(auth);
+
   let userData;
   if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
-  console.log(userData.id._id);
+
 
   async function hundleSubmit(e) {
     e.preventDefault();

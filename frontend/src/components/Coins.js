@@ -17,7 +17,7 @@ function Coins() {
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=USD"
       )
       .then((res) => {
-        console.log(res.data.coins);
+
         setallCoins(res.data.coins);
         setloading(false);
       })
@@ -25,12 +25,7 @@ function Coins() {
         console.log(err);
       });
   }, []);
-  //get coins names
-  // let s = "";
-  // AllCoins.forEach((c) => {
-  //   s += `"${c.id}",`;
-  // });
-  // console.log(s);
+
 
   if (loading) return <Loading />;
 

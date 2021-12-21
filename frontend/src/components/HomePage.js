@@ -17,7 +17,7 @@ function HomePage() {
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=5&currency=USD"
       )
       .then((res) => {
-        console.log(res.data.coins);
+       
         settopCoins(res.data.coins);
         setloading(false);
       })
@@ -25,7 +25,7 @@ function HomePage() {
         console.log(err);
       });
   }, []);
-  console.log(topCoins);
+ 
   if (loading) return <Loading />;
   return (
     <div className="main-container">

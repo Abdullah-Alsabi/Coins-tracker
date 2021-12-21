@@ -11,7 +11,7 @@
     "start": "nodemon server",
     "client": "cd frontend && npm start"
   },
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/Abdullah-Alsabi/Final-Project.git"
   },

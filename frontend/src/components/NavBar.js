@@ -20,7 +20,7 @@ function NavBar() {
 
   let userData;
   if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
-  console.log(auth);
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>

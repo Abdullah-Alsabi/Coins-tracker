@@ -17,7 +17,7 @@ function Portfolio() {
   const navigate = useNavigate();
   let token;
   if (auth === "user") token = document.cookie.split("jwt=")[1];
-  console.log(auth);
+
   let userData;
   let data;
   //user id from cookie
@@ -72,8 +72,7 @@ function Portfolio() {
         console.log(err);
       });
   }, []);
-  console.log(Portfolio);
-  console.log(coins);
+
 
   if (loading) return <Loading />;
   return (
@@ -171,7 +170,7 @@ function Portfolio() {
                   <tr>
                     <td>
                       <Link to={"/coins/"}>
-                        <span>{c.trans.coinName}</span>
+                        <span>{c.coin.coin.name}</span>
                       </Link>
                     </td>
                     <td>

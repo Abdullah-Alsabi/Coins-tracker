@@ -12,11 +12,11 @@ function Coin() {
   const [Coindetails, setCoindetails] = useState({});
   const [loading, setloading] = useState(true);
 
-  useEffect(async () => {
-    let d = await axios
+  useEffect(() => {
+    axios
       .get("https://api.coinstats.app/public/v1/coins/" + id + "?currency=USD")
       .then((res) => {
-        console.log(res.data.coin);
+   
         setCoindetails(res.data.coin);
         setloading(false);
       })
@@ -24,7 +24,7 @@ function Coin() {
         console.log(err);
       });
   }, [id]);
-  console.log(Coindetails);
+
 
   function convertToInternationalCurrencySystem(labelValue) {
     // Nine Zeroes for Billions

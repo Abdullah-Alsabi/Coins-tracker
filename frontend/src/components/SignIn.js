@@ -22,10 +22,16 @@ function SignIn() {
         },
       };
       setloading(true);
-      axios.post("/users/signin", user, config);
-      setAuth("user");
-      navigate("/");
-      setloading(false);
+      axios
+        .post("/users/signin", user, config)
+        .then(() => {
+          setAuth("user");
+          navigate("/");
+          setloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       setError(error.response.data.message);
       setloading(false);

@@ -9,21 +9,20 @@ import userStatus from "../utils/userStatus";
 function AllPortfolios() {
   const [AllPortfolios, setAllPortfolios] = useState([]);
   const [loading, setloading] = useState(true);
-  let { auth, setAuth } = useContext(userStatus);
+  const { auth, setAuth } = useContext(userStatus);
   const navigate = useNavigate();
   let token;
-  if (auth === "user") token = document.cookie.split("jwt=")[1];
-  console.log(auth);
+
   let userData;
-  let data;
+  if (auth === "user") {
+    token = document.cookie.split("jwt=")[1];
+    userData = JSON.parse(atob(token.split(".")[1]));
+  }
+
   //user id from cookie
 
+  userData = JSON.parse(atob(token.split(".")[1]));
   useEffect(() => {
-    if (auth !== "user") {
-      navigate("/signin");
-      return null;
-    } else userData = JSON.parse(atob(token.split(".")[1]));
-    data = { userId: userData.id._id };
     axios
       .get("/portfolio/getportfolios/" + userData.id._id)
       .then((res) => {
@@ -35,7 +34,9 @@ function AllPortfolios() {
       });
   }, []);
 
-  console.log(AllPortfolios);
+  if (auth !== "user") {
+    navigate("/signin");
+  }
   if (loading) return <Loading />;
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
@@ -52,9 +53,9 @@ function AllPortfolios() {
         </p>
       </Link>
       <div className="portfolios">
-        {AllPortfolios.map((p) => {
+        {AllPortfolios.map((p, index) => {
           return (
-            <Link to={"/portfolios/" + p._id}>
+            <Link key={index} to={"/portfolios/" + p._id}>
               <Card
                 className="Portfolio__card"
                 style={{ width: "18rem", height: "100%" }}
@@ -73,5 +74,4 @@ function AllPortfolios() {
     </div>
   );
 }
-
 export default AllPortfolios;
