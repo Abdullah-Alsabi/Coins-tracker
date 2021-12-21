@@ -172,26 +172,26 @@ Admin model
 ```
 ### Backend routes
 
-| HTTP Method | URL            | Request Body                                                 | Success status | Error Status | Description                                                  |
-| ----------- | -------------- | ------------------------------------------------------------ | -------------- | ------------ | ------------------------------------------------------------ |
+| HTTP Method | URL   | Request Body    | Success status | Error Status | Description  |
+| ----------- | -------------- | ---------------------------------------------------- | -------------- | ------------ | ------------------------------------------- |
 
-| POST        | `/users/signup` | {userName, email, password}                                      | 200            | 404          | Checks if fields not empty and user not exists (404), then create user with encrypted password, and store user in cookie |
-| POST        | `/users/signin`  | {username, password}                                         | 200            | 404          | Checks if fields not empty, if user exists (404), and if password matches (404), then stores user in cookie |
-| GET        | `/users/signout` | (empty)                                                      | 200            | 404          | Logs out the user                                            |
-| PUT        | `/users/updateuser/:id` | {currentPassword, newPassword}          | 200            | 404          | Change the user password                  |
-| GET        | `/users/getuser/:id` | (empty)          | 200            | 404          | Get user information                 |
-| GET        | `/users/getusers` | (empty)          | 200            | 404          | Get all users information                 |
-| DELETE        | `/users/deleteuser/:id` | (empty)          | 200            | 404          | Delete the user                  |
-| GET        | `/portfolio/getportfolios/:id` | (empty)         | 200            | 404          | Get all user portfolios                 |
-| POST        | `/portfolio/getportfolio/:id` | {userId}          | 200            | 404          | Get portfolios by id                 |
-| POST        | `/portfolio/addportfolio` | { id, portfolioName, totalCost }          | 200            | 404          | Add new portfolios for the user                  |
-| POST        | `/portfolio/deleteportfolio/:id` | {userId}          | 200            | 404          | Delete user portfolio by id                  |
-| POST        | `/transactions/gettransactions/:id` | {userId}          | 200            | 404          | Get all portfolio transactions                  |
-| POST        | `/transactions/addtransactions` | { id, _id, coinName, tranType, tranAmount, tranPrice }          | 200            | 404          | Add transaction to user portfolio                  |
-| POST        | `/transactions/deletetransactions/:id` | { userId, trans_id }          | 200            | 404          | Delete transaction from user portfolio by id                 |
-| POST        | `/admin/signup` | {userName, email, password}                                      | 200            | 404          | Checks if fields not empty and admin not exists (404), then create Admin with encrypted password, and store admin in cookie |
-| POST        | `/admin/signin`  | {username, password}                                         | 200            | 404          | Checks if fields not empty, if admin exists (404), and if password matches (404), then stores admin in cookie |
-| GET        | `/admin/signout` | (empty)                                                      | 200            | 404          | Logs out the admin                                            |
+| POST | `/users/signup` | {userName, email, password} | 200 | 404 | Checks if fields not empty and user not exists (404), then create user with encrypted password, and store user in cookie |
+| POST  | `/users/signin`  | {username, password} | 200  | 404 | Checks if fields not empty, if user exists (404), and if password matches (404), then stores user in cookie |
+| GET  | `/users/signout` | (empty)    | 200     | 404    | Logs out the user           |
+| PUT  | `/users/updateuser/:id` | {currentPassword, newPassword}          | 200            | 404          | Change the user password     |
+| GET  | `/users/getuser/:id` | (empty)          | 200            | 404          | Get user information    |
+| GET  | `/users/getusers` | (empty)          | 200            | 404          | Get all users information    |
+| DELETE | `/users/deleteuser/:id` | (empty)          | 200            | 404          | Delete the user    |
+| GET  | `/portfolio/getportfolios/:id` | (empty)  | 200   | 404  | Get all user portfolios       |
+| POST | `/portfolio/getportfolio/:id` | {userId}  | 200 | 404   | Get portfolios by id     |
+| POST | `/portfolio/addportfolio` | { id, portfolioName, totalCost }          | 200            | 404          | Add new portfolios for the user                  |
+| POST | `/portfolio/deleteportfolio/:id` | {userId}  | 200    | 404  | Delete user portfolio by id   |
+| POST | `/transactions/gettransactions/:id` | {userId} | 200 | 404 | Get all portfolio transactions  |
+| POST | `/transactions/addtransactions` | { id, _id, coinName, tranType, tranAmount, tranPrice }          | 200            | 404          | Add transaction to user portfolio  |
+| POST | `/transactions/deletetransactions/:id` | { userId, trans_id } | 200 | 404 | Delete transaction from user portfolio by id                 |
+| POST | `/admin/signup` | {userName, email, password} | 200 | 404 | Checks if fields not empty and admin not exists (404), then create Admin with encrypted password, and store admin in cookie |
+| POST | `/admin/signin`  | {username, password}  | 200  | 404  | Checks if fields not empty, if admin exists (404), and if password matches (404), then stores admin in cookie |
+| GET        | `/admin/signout` | (empty)            | 200            | 404          | Logs out the admin     |
 ### Links
 
 
