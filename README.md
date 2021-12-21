@@ -184,7 +184,7 @@ Admin model
 
 [Deployed App Link](https://coins-tracker.herokuapp.com/)
 
-[Slides Link](https://docs.google.com/presentation/d/1AEQgQgVEEf4n3ua5D9rTpcHKUKW4q-CpHiId2PsPtJw/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1tFRBQ0PcVpWOL1erzwcQQqggeh93GpQfA5njHgv4CkA/edit?usp=sharing)
 
 [Figma Link](https://www.figma.com/file/NOe3rOCYJQvPHFyPScir6R/Abdullah's-co-team-library?node-id=0%3A1)
 
