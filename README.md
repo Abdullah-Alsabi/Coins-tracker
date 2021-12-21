@@ -88,7 +88,8 @@ User model
   },
   Portfolios: {
     type: [PortfolioSchema],
-    default: [],
+    required: false,
+    default: [0],
   },
 }
 ```
@@ -99,12 +100,13 @@ Portfolio model
 {
   portfolioName: {
     type: String,
-    unique: true,
     required: [true, " portfolioName should be provided"],
+    default: "Portfolio",
   },
   totalCost: {
     type: Number,
     required: [false, " totalCost is optional"],
+    default: 0,
   },
   transactions: {
     type: [TransactionSchema],
@@ -115,21 +117,54 @@ Portfolio model
 
 Transaction model
 
-//Not Finished yet
 ```
 {
-  transactionName: {
+  coinName: {
     type: String,
-    unique: true,
     required: [true, " Username should be provided"],
+    default: "Transaction",
   },
-   transactionType: {
+  tranType: {
     type: String,
-    required: [true, " Username should be provided"],
+    required: [true, "Transaction Type should be provided"],
+    default: "buy",
+  },
+  tranAmount: {
+    type: Number,
+    required: [true, "Transaction amount should be provided"],
+    default: 0,
+  },
+  tranPrice: {
+    type: Number,
+    required: [true, "Transaction price should be provided"],
+    default: 0,
   },
 }
 ```
 
+Admin model
+
+```
+{
+  userName: {
+    type: String,
+    unique: true,
+    required: [true, " Username should be provided and unique"],
+  },
+  email: {
+    type: String,
+    required: [true, "email should be provided and unique"],
+    unique: true,
+    lowercase: true,
+    validate: [isEmail, "isInvalid"],
+  },
+  password: {
+    type: String,
+    minlength: [8, "minemum password length is 8"],
+    required: [true, "password should be provided"],
+  },
+}
+```
 ### Backend routes
 
 | HTTP Method | URL            | Request Body                                                 | Success status | Error Status | Description                                                  |
@@ -147,7 +182,7 @@ Transaction model
 
 [Github repository Link](https://github.com/Abdullah-Alsabi/Final-Project)
 
-[Deployed App Link](http://heroku.com/)
+[Deployed App Link](https://coins-tracker.herokuapp.com/)
 
 [Slides Link](https://docs.google.com/presentation/d/1AEQgQgVEEf4n3ua5D9rTpcHKUKW4q-CpHiId2PsPtJw/edit?usp=sharing)
 
