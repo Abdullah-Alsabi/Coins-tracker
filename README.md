@@ -6,11 +6,11 @@
 - **Sign Up:** As an anon I can sign up in the platform so that I can create a portfolio.
 - **Sign In:** As a user I can sign in to the platform so that I can check my portfolios and update them.
 - **Sign Out:** As a user I can sign out from the platform so no one else can see my portfolios.
+- **Change Password:** As a user I can change my password.
 - **Add Portfolios** As a user I can add a portfolio.
 - **View Portfolio** As a user I can view my Portfolio.
 - **Delete Portfolio** As a user I can delete my portfolio.
 - **Add transaction** As a user I can add transactions to my portfolios.
-- **Edit transaction** As a user I can edit my transaction.
 - **View transaction** As a user I can view my transaction.
 - **Delete transaction** As a user I can delete my transaction.
 - **View Coins Table** As any type of users I can see the coins table.
@@ -18,7 +18,7 @@
 
 ## Admin Stories 
 - **View Users** an admin I can view all users.
-- **Admin Edit User** As an admin I can edit users profile.
+- **Admin Delete User** As an admin I can delete users.
 
 
 ## Client / Frontend
@@ -31,22 +31,26 @@
 | `/signup`        | SignUp               | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup|
 | `/signin`        | SignIn               | anon only `<AnonRoute>`    | Signin form, link to signup, navigate to homepage after login|
 |  n/a         | NavBar               | user only `<PrivateRoute>`    | Signout button , remove the cookie , navigate to homepage after signout|
+|  n/a         | NavBar               | anon only `<AnonRoute>`    | Signin button , and signup button   |
+|  n/a         | NavBar               | Admin only `<AdminRoute>`    | Admin button  ,navigate to adminpage   |
 | `/admin`         | Admin                | Admin only `<AdminRoute>`  | Shows all users                                              |
-| `/admin/:id`     | Admin                | Admin only `<AdminRoute>`  |Edit user info                                                |
+| n/a     | Admin                | Admin only `<AdminRoute>`  |Delete user                                                 |
 | `/coins`         | Coins                | public `<Route>`           | Shows all coins in a Table                                   |
 | `/coin`          | Coin                 | public `<Route>`           | Shows all coin details                                       |
-| `/portfolio/:id` | Portfolio            | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
-| `/portfolio/add` | AddPortfolio         | user only `<PrivateRoute>` | Add portfolio                                                |
-| `/portfolio/:id` | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
-| `/portfolio/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                  |
-| `/portfolio/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                      |
-| `/portfolio/edittransaction/:id` | EditTransaction     | user only `<PrivateRoute>` | Edit transaction                              |
-| `/portfolio/transaction/:id` | n/a                  | user only `<PrivateRoute>` | Delete transaction                               |
+| `/portfolios` | AllPortfolios            | user only `<PrivateRoute>` | Show all portfolios                              |
+| `/portfolios/:id` | Portfolio            | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
+| `/addportfolio` | AddPortfolio         | user only `<PrivateRoute>` | Add portfolio                                                |
+| n/a | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
+| `/portfolios/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                  |
+| `/portfolios/:id/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                      |
+| n/a | n/a                  | user only `<PrivateRoute>` | Delete transaction                               |
 
 ### Components
 - HomePage
 - SignUp
 - SignIn
+- SignInAdmin
+- Profile
 - Admin
 - Coins
 - Coin
@@ -54,7 +58,7 @@
 - AddPortfolio
 - Transaction
 - AddTransaction
-- EditTransaction
+- Search
 - NavBar
 - Footer
 - Loading
