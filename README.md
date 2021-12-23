@@ -16,6 +16,9 @@ Coins tracker allows the user to track his transactions and get more details abo
 - **View Coin Details** As any type of users I can see each coin details.
 
 ## Admin Stories 
+- **Sign Up:** As an anon I can sign up in the platform and delete users.
+- **Sign In:** As an admin I can sign in to the platform.
+- **Sign Out:** As an admin I can sign out from the platform so no one else can see my portfolios.
 - **View Users** an admin I can view all users.
 - **Admin Delete User** As an admin I can delete users.
 
