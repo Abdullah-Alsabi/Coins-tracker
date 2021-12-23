@@ -11,7 +11,6 @@ Coins tracker allows the user to track his transactions and get more details abo
 - **View Portfolio** As a user I can view my Portfolio.
 - **Delete Portfolio** As a user I can delete my portfolio.
 - **Add transaction** As a user I can add transactions to my portfolios.
-- **View transaction** As a user I can view my transaction.
 - **Delete transaction** As a user I can delete my transaction.
 - **View Coins Table** As any type of users I can see the coins table.
 - **View Coin Details** As any type of users I can see each coin details.
@@ -41,7 +40,6 @@ Coins tracker allows the user to track his transactions and get more details abo
 | `/portfolios/:id` | Portfolio            | user only `<PrivateRoute>` | Show the details of a Portfolio                              |
 | `/addportfolio` | AddPortfolio         | user only `<PrivateRoute>` | Add portfolio                                                |
 | n/a | n/a                  | user only `<PrivateRoute>` | Delete Portfolio                                             |
-| `/portfolios/transaction/:id` | Transaction        | user only `<PrivateRoute>` | Show the details of a transaction                  |
 | `/portfolios/:id/addtransaction` | AddTransaction     | user only `<PrivateRoute>` | Add transaction to a portfolio                      |
 | n/a | n/a                  | user only `<PrivateRoute>` | Delete transaction                               |
 
@@ -56,7 +54,6 @@ Coins tracker allows the user to track his transactions and get more details abo
 - Coin
 - Portfolio
 - AddPortfolio
-- Transaction
 - AddTransaction
 - Search
 - NavBar
