@@ -70,9 +70,7 @@ function NavBar() {
                   className="Link_Nav_profile"
                   onClick={() => navigate("/profile")}
                 />
-                <Button
-                  className="Link_Nav_signOut"
-                  variant="danger"
+                <button
                   onClick={() => {
                     axios
                       .get("/users/signout")
@@ -84,9 +82,14 @@ function NavBar() {
                         console.log(err);
                       });
                   }}
+                  style={{
+                    borderRadius: "0.3rem",
+                    color: "#444",
+                  }}
+                  className="mt-3 mb-3 p-2 DeletePortfolio"
                 >
-                  signout
-                </Button>
+                  signout{" "}
+                </button>
               </div>
             ) : null}
             {auth === "admin" ? (

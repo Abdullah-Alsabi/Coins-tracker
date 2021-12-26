@@ -260,8 +260,7 @@ function Portfolio() {
                     </td>
                     <td>
                       {" "}
-                      <Button
-                        variant="danger"
+                      <button
                         onClick={() => {
                           setloading(true);
 
@@ -291,9 +290,14 @@ function Portfolio() {
                               setloading(false);
                             });
                         }}
+                        style={{
+                          borderRadius: "0.3rem",
+                          color: "#444",
+                        }}
+                        className="mt-3 mb-3 p-2 DeletePortfolio"
                       >
                         Delete
-                      </Button>
+                      </button>
                     </td>
                   </tr>
                 );
