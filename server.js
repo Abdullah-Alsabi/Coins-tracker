@@ -38,8 +38,6 @@ app.use("/portfolio", portfolioRouter);
 app.use("/transactions", TransactionRoutes);
 app.use("/admin", AdminRoutes);
 
-
-
 // app.use(notFound);
 app.use(errorHandler);
 // app.use("/authors", authorsRouter);
