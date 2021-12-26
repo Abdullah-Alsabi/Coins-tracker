@@ -14,8 +14,14 @@ require("dotenv").config();
 // Mongoose Here
 const uri = process.env.ATLAS_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
+// mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(
+  process.env.ATLAS_URI,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  () => {
+    console.log("Connected to MongoDB");
+  }
+);
 // msg when connect
 
 const connection = mongoose.connection;
