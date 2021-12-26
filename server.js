@@ -38,20 +38,13 @@ app.use("/portfolio", portfolioRouter);
 app.use("/transactions", TransactionRoutes);
 app.use("/admin", AdminRoutes);
 
-// if (process.env.NODE_ENV === "production") {
-//   // Serve any static files
-//   app.use(express.static(path.join(__dirname, "client/build")));
-//   // Handle React routing, return all requests to React app
-//   app.get("*", function (req, res) {
-//     res.sendFile(path.join(__dirname, "client/build", "index.html"));
-//   });
-// }
+
 
 // app.use(notFound);
-// app.use(errorHandler);
+app.use(errorHandler);
 // app.use("/authors", authorsRouter);
 
-app.use(express.static("frontend/build"));
+// app.use(express.static("frontend/build"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend/build/index.html"));
 });

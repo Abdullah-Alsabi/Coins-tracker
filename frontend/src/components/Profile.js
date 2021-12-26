@@ -129,29 +129,37 @@ function Profile() {
                 </div>
               </div>
 
-              <div className="mt-5 row gutters">
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div className="mt-5 row justify-content-center gutters">
+                <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                   <div className="text-center">
-                    <button
+                    <p
                       onClick={() => {
                         navigate("/");
                       }}
                       type="button"
                       id="submit"
                       name="submit"
-                      className=" m-1 btn btn-secondary"
+                      style={{
+                        borderRadius: "0.3rem",
+                        color: "#444",
+                      }}
+                      className="mt-3 mb-3 p-2 DeletePortfolio"
                     >
                       Cancel
-                    </button>
-                    <button
+                    </p>
+                    <p
                       onClick={hundleUpdate}
                       type="button"
                       id="submit"
                       name="submit"
-                      className=" m-1 btn btn-primary"
+                      style={{
+                        borderRadius: "0.3rem",
+                        color: "#444",
+                      }}
+                      className="mt-3 p-2 addTransaction"
                     >
                       Update
-                    </button>
+                    </p>
                   </div>
                 </div>
               </div>
