@@ -41,8 +41,8 @@ app.use("/admin", AdminRoutes);
 //   });
 // }
 
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 // app.use("/authors", authorsRouter);
 
 app.use(express.static("frontend/build"));
