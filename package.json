@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
-    "start": "nodemon server",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "nodemon server.js",
     "client": "cd frontend && npm start"
   },
   "repository": {
@@ -31,7 +31,8 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

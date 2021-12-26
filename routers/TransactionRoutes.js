@@ -58,4 +58,32 @@ router.post("/addtransactions", async (req, res) => {
   // res.send("trans added");
 });
 
+router.post("/deletetransactions/:id", async (req, res) => {
+  console.log("iam in");
+  //userId is user id and the id is the port id and  trans_id
+  const { userId, trans_id } = req.body;
+  const { id } = req.params;
+  const data = await Users.findById(userId);
+
+  const portfolio = data.Portfolios.filter((e) => {
+    return e._id.toString() === id;
+  });
+
+  let trans = portfolio[0].transactions;
+  let newTrans = trans.filter((t) => {
+    return t._id.toString() !== trans_id;
+  });
+
+  portfolio[0].transactions = newTrans;
+  let newPorts = data.Portfolios.filter((e) => {
+    if (e._id.toString() === id) {
+      e.transactions = newTrans;
+    }
+    return e;
+  });
+  data.portfolios = newPorts;
+  data.save();
+  res.json(newPorts);
+});
+
 module.exports = router;

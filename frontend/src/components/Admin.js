@@ -17,7 +17,6 @@ function Admin() {
     axios
       .get("/users/getusers")
       .then((res) => {
-       
         setusers(res.data);
         setloading(false);
       })
@@ -44,9 +43,9 @@ function Admin() {
             </tr>
           </thead>
           <tbody>
-            {users.map((u) => {
+            {users.map((u, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td>
                     <span>{u.userName}</span>
                   </td>

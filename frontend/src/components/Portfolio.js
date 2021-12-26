@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import axios from "axios";
-import { Card, Table } from "react-bootstrap";
+import { Card, Table, Button } from "react-bootstrap";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import userStatus from "../utils/userStatus";
@@ -12,8 +12,10 @@ function Portfolio() {
   const { id } = useParams();
   const [Portfolio, setPortfolio] = useState({});
   const [loading, setloading] = useState(true);
+  const [deletedtrans, setdeletedtrans] = useState({});
   let { auth, setAuth } = useContext(userStatus);
   const [coins, setcoins] = useState([]);
+  const [userId, setuserId] = useState("");
   const navigate = useNavigate();
   let token;
   if (auth === "user") token = document.cookie.split("jwt=")[1];
@@ -26,16 +28,18 @@ function Portfolio() {
     // setloading(false);
     // i have to send the user id throgh the body
     if (auth !== "user") {
-      navigate("./signin");
+      navigate("/signin");
       return null;
     }
     userData = JSON.parse(atob(token.split(".")[1]));
     data = { userId: userData.id._id };
+    setuserId(userData.id._id);
+
     axios
       .post("/portfolio/getportfolio/" + id, data)
       .then((res) => {
         setPortfolio(res.data);
-
+        setcoins([]);
         res.data.transactions.map(async (t) => {
           let d = await axios
             .get(
@@ -48,12 +52,10 @@ function Portfolio() {
               my_object.coin = res.data;
               my_object.trans = t;
 
-              my_object.total = parseFloat(
-                res.data.coin.price * t.tranAmount -
-                  t.tranAmount * t.tranPrice +
-                  t.tranAmount * t.tranPrice
-              ).toFixed(2);
-
+              my_object.total =
+                t.tranType === "buy"
+                  ? parseFloat(res.data.coin.price * t.tranAmount).toFixed(2)
+                  : parseFloat(t.tranAmount * t.tranPrice).toFixed(2);
               coins.push(my_object);
 
               setloading(false);
@@ -71,8 +73,7 @@ function Portfolio() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
+  }, [deletedtrans]);
 
   if (loading) return <Loading />;
   return (
@@ -152,9 +153,11 @@ function Portfolio() {
                   NAME
                 </th>
                 <th>AMOUNT</th>
-                <th>PRICE</th>
-                <th>TOTAL</th>
+                <th className="onPhone">PRICE</th>
+                <th className="onPhone">TOTAL</th>
+                <th>P/L</th>
                 <th
+                  className="onPhone"
                   style={{
                     borderTopRightRadius: "0.6rem",
                     borderRightColor: "transparent",
@@ -162,12 +165,13 @@ function Portfolio() {
                 >
                   24H CHANGE
                 </th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              {coins.map((c) => {
+              {coins.map((c, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td>
                       <Link to={"/coins/"}>
                         <span>{c.coin.coin.name}</span>
@@ -178,7 +182,7 @@ function Portfolio() {
                         <span>{c.trans.tranAmount}</span>
                       </Link>
                     </td>
-                    <td>
+                    <td className="onPhone">
                       <Link to={"/coins/"}>
                         <span>
                           $
@@ -188,7 +192,7 @@ function Portfolio() {
                         </span>
                       </Link>
                     </td>
-                    <td>
+                    <td className="onPhone">
                       <Link to={"/coins/"}>
                         <span>
                           {c.trans.tranType} ● {c.total}{" "}
@@ -196,6 +200,21 @@ function Portfolio() {
                       </Link>
                     </td>
                     <td>
+                      <Link to={"/coins/"}>
+                        <span>
+                          {c.trans.tranType} ●{" "}
+                          {c.trans.tranType === "buy"
+                            ? parseFloat(
+                                c.total - c.trans.tranPrice * c.trans.tranAmount
+                              ).toFixed(2)
+                            : parseFloat(
+                                c.total - c.trans.tranPrice * c.trans.tranAmount
+                              ).toFixed(2)}
+                          {" pl"}
+                        </span>
+                      </Link>
+                    </td>
+                    <td className="onPhone">
                       <Link to={"/coins/" + c.id}>
                         {c.coin.coin.priceChange1d > 0 ? (
                           <span
@@ -238,6 +257,43 @@ function Portfolio() {
                           </span>
                         ) : null}
                       </Link>
+                    </td>
+                    <td>
+                      {" "}
+                      <Button
+                        variant="danger"
+                        onClick={() => {
+                          setloading(true);
+
+                          let data1 = {
+                            userId: userId,
+                            trans_id: c.trans._id,
+                          };
+                          console.log(
+                            data1.userId,
+                            " ",
+                            data1.trans_id,
+                            " ",
+                            Portfolio._id
+                          );
+                          axios
+                            .post(
+                              "/transactions/deletetransactions/" +
+                                Portfolio._id,
+                              data1
+                            )
+                            .then((res) => {
+                              setdeletedtrans(res.data);
+                              setloading(false);
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                              setloading(false);
+                            });
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 );

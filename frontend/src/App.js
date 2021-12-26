@@ -22,17 +22,6 @@ import Profile from "./components/Profile";
 function App() {
   let [auth, setAuth] = useState("none");
 
-  // function getCookie(cname) {
-  //   var arrayb = document.cookie.split(";");
-  //   for (const item of arrayb) {
-  //     if (item.startsWith("jwt=")) {
-  //       return item.substr(4);
-  //     }
-  //   }
-  // }
-  // let token = getCookie("jwt");
-
-  // const value = token;
   return (
     <userStatus.Provider value={{ auth, setAuth }}>
       <div className="App allButFooter">

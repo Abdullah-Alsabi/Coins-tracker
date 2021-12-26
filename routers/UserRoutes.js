@@ -80,24 +80,26 @@ router.get("/signout", (req, res) => {
 //update user
 router.put("/updateuser/:id", (req, res) => {
   Users.findById(req.params.id).then(async (user) => {
-    let newEmail = req.body.email;
-    let userName = req.body.userName;
-    if (userName != undefined) {
-      const checkUserName = await Users.findOne({ userName });
-      if (checkUserName) {
-        res.status(404).send("The username already in use");
-      } else user.userName = userName;
-    }
-    if (newEmail != undefined) {
-      const userExists = await Users.findOne({ newEmail });
-      if (userExists) {
-        res.status(404).send("The email already in use");
-      } else user.email = newEmail;
-    }
+    // let newEmail = req.body.email;
+    // let userName = req.body.userName;
+    const salt = await bcrypt.genSalt(10);
+    // if (userName != undefined) {
+    //   const checkUserName = await Users.findOne({ userName });
+    //   if (checkUserName) {
+    //     res.status(404).send("The username already in use");
+    //   } else user.userName = userName;
+    // }
+    // if (newEmail != undefined) {
+    //   const userExists = await Users.findOne({ newEmail });
+    //   if (userExists) {
+    //     res.status(404).send("The email already in use");
+    //   } else user.email = newEmail;
+    // }
     if (req.body.currentPassword != undefined) {
       if (user && (await user.matchPassword(req.body.currentPassword))) {
         if (req.body.newPassword != undefined)
-          user.password = req.body.newPassword;
+          req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
+        user.password = req.body.newPassword;
       }
     }
     user

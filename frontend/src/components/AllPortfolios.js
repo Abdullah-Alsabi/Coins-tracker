@@ -21,8 +21,11 @@ function AllPortfolios() {
 
   //user id from cookie
 
-  userData = JSON.parse(atob(token.split(".")[1]));
   useEffect(() => {
+    if (auth !== "user") {
+      navigate("/signin");
+      return null;
+    }
     axios
       .get("/portfolio/getportfolios/" + userData.id._id)
       .then((res) => {
@@ -34,9 +37,6 @@ function AllPortfolios() {
       });
   }, []);
 
-  if (auth !== "user") {
-    navigate("/signin");
-  }
   if (loading) return <Loading />;
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">

@@ -127,6 +127,17 @@ a:hover {
   display: flex;
   flex-direction: row-reverse;
 }
+.Link_Nav_profile {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+  font-size: 28px;
+  margin-right: 4%;
+}
+
+.Link_Nav_profile:hover {
+  cursor: pointer;
+}
 @media only screen and (min-width: 1800px) {
   .search__css {
     position: absolute;
@@ -147,12 +158,7 @@ a:hover {
     margin-bottom: 0.5%;
     bottom: 0;
   }
-  .Link_Nav_userWelcome {
-    margin-right: 4%;
-  }
-  .Link_Nav_userWelcome:hover {
-    cursor: pointer;
-  }
+
   .admin__div {
     width: 70vw !important;
     display: flex;

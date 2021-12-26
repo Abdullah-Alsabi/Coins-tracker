@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./signin-signup-nav-footer.css";
@@ -15,7 +15,6 @@ function AddPortfolio() {
 
   let userData;
   if (auth === "user") userData = JSON.parse(atob(token.split(".")[1]));
-
 
   async function hundleSubmit(e) {
     e.preventDefault();
@@ -39,10 +38,12 @@ function AddPortfolio() {
       setloading(false);
     }
   }
-  if (auth !== "user") {
-    navigate("/signin");
-    return null;
-  }
+  useEffect(() => {
+    if (auth !== "user") {
+      navigate("/signin");
+      return null;
+    }
+  }, [auth]);
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center">
       {loading && <Loading />}

@@ -12,7 +12,6 @@ import { Form } from "react-bootstrap";
 function AddTransaction() {
   //port id
   const { id } = useParams();
-
   let { auth, setAuth } = useContext(userStatus);
   const [transaction, setTransaction] = useState({});
   const [loading, setloading] = useState(false);
@@ -708,10 +707,12 @@ function AddTransaction() {
       item.remove();
     });
   }
-  if (auth !== "user") {
-    navigate("/signin");
-    return null;
-  }
+  useEffect(() => {
+    if (auth !== "user") {
+      navigate("/signin");
+      return null;
+    }
+  }, [auth]);
   return (
     <div>
       <div className="container d-flex flex-column align-items-center justify-content-center addTrans">

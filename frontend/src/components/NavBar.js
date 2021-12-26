@@ -6,6 +6,8 @@ import "../App.css";
 import userStatus from "../utils/userStatus";
 import Logo from "../images/Logo.png";
 import Search from "./Search";
+import { FaUserCog } from "react-icons/fa";
+
 function NavBar() {
   let { auth, setAuth } = useContext(userStatus);
   const navigate = useNavigate();
@@ -33,12 +35,12 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto d-flex ">
             {auth === "none" ? (
-              <Link className="Link_Nav" to="/Signup">
+              <Link className="Link_Nav" to="/signup">
                 Signup
               </Link>
             ) : null}
             {auth === "none" ? (
-              <Link className="Link_Nav" to="/Signin">
+              <Link className="Link_Nav" to="/signin">
                 signin
               </Link>
             ) : null}
@@ -61,19 +63,20 @@ function NavBar() {
             {auth === "user" ? (
               <div className="authDiv">
                 {" "}
-                <h6
-                  onClick={() => navigate("/profile")}
-                  className="Link_Nav_userWelcome"
-                >
+                <h6 className="Link_Nav_userWelcome">
                   Welcome {userData.id.userName}{" "}
                 </h6>{" "}
+                <FaUserCog
+                  className="Link_Nav_profile"
+                  onClick={() => navigate("/profile")}
+                />
                 <Button
                   className="Link_Nav_signOut"
                   variant="danger"
                   onClick={() => {
                     axios
                       .get("/users/signout")
-                      .then((res) => {
+                      .then(() => {
                         setAuth("none");
                         navigate("/");
                       })
