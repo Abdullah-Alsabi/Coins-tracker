@@ -283,7 +283,10 @@ function Portfolio() {
                             )
                             .then((res) => {
                               setdeletedtrans(res.data);
-                              setloading(false);
+                              setTimeout(() => {
+                                setdeletedtrans(res.data);
+                                setloading(false);
+                              }, 1000);
                             })
                             .catch((err) => {
                               console.log(err);
