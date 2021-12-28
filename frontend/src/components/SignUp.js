@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Alert } from "react-bootstrap";
 import "./signin-signup-nav-footer.css";
 import userStatus from "../utils/userStatus";
 import Loading from "./Loading";
@@ -15,19 +15,22 @@ function SignUp() {
   const [loading, setloading] = useState(false);
   async function hundleSubmit(e) {
     e.preventDefault();
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      setloading(true);
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    setloading(true);
+    console.log(user.password.length);
+    if (user.password.length < 8) {
+      setError("Password is not secure and should be more than 8 digites");
+      setloading(false);
+    } else {
       const { data } = await axios.post("/users/signup", user, config);
+      setError(false);
       setAuth("user");
       navigate("/");
-      setloading(false);
-    } catch (error) {
-      setError(error.response.data.message);
       setloading(false);
     }
   }
