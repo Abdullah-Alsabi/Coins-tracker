@@ -7,30 +7,24 @@ let Users = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const generateToken = require("../utils/generateToken");
 // sign up
-router.post(
-  "/signup",
-  asyncHandler(async (req, res) => {
-    let { userName, email, password } = req.body;
-    const userExists = await Users.findOne({ email });
-    const checkUserName = await Users.findOne({ userName });
+router.post("/signup", async (req, res) => {
+  let { userName, email, password } = req.body;
+  const userExists = await Users.findOne({ email });
+  const checkUserName = await Users.findOne({ userName });
 
-    if (userExists) {
-      res.status(404);
-      throw new Error("User already exists");
-    }
-
-    if (checkUserName) {
-      res.status(404);
-      throw new Error("User already exists");
-    }
+  if (userExists || checkUserName) {
+    console.log("i am in and the are exists");
+    res.status(404);
+    res.send("User email or Username is already exists or email is invalid");
+  } else {
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
-    console.log(password);
     const user = await Users.create({
       userName,
       email,
       password,
     });
+    console.log(user);
     let token = generateToken(user);
     res.cookie("jwt", token, { httpOnly: false });
     if (user) {
@@ -40,34 +34,28 @@ router.post(
         email: user.email,
         token: token,
       });
-    } else {
-      res.status(400);
-      throw new Error("User not found");
     }
-  })
-);
+  }
+});
 
 // sign in
-router.post(
-  "/signin",
-  asyncHandler(async (req, res) => {
-    const { userName, password } = req.body;
-    const user = await Users.findOne({ userName });
+router.post("/signin", async (req, res) => {
+  const { userName, password } = req.body;
+  const user = await Users.findOne({ userName });
+  if (!user || !(await user.matchPassword(password))) {
+    console.log("i am in and the are exists");
+    res.status(404).send("wrong username or password");
+  } else if (user && (await user.matchPassword(password))) {
     let token = generateToken(user);
-    if (user && (await user.matchPassword(password))) {
-      res.cookie("jwt", token, { httpOnly: false });
-      res.json({
-        _id: user._id,
-        userName: user.userName,
-        email: user.email,
-        token: token,
-      });
-    } else {
-      res.status(400);
-      throw new Error("Invalid Email or Password");
-    }
-  })
-);
+    res.cookie("jwt", token, { httpOnly: false });
+    res.json({
+      _id: user._id,
+      userName: user.userName,
+      email: user.email,
+      token: token,
+    });
+  }
+});
 
 //sign out
 router.get("/signout", (req, res) => {

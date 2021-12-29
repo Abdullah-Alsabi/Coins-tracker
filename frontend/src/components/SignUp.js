@@ -6,6 +6,7 @@ import "./signin-signup-nav-footer.css";
 import userStatus from "../utils/userStatus";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
+import validator from "validator";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -26,12 +27,21 @@ function SignUp() {
     if (user.password.length < 8) {
       setError("Password is not secure and should be more than 8 digites");
       setloading(false);
-    } else {
-      const { data } = await axios.post("/users/signup", user, config);
-      setError(false);
-      setAuth("user");
-      navigate("/");
+    } else if (!validator.isEmail(user.email)) {
+      setError("This is not a valid email");
       setloading(false);
+    } else {
+      axios
+        .post("/users/signup", user, config)
+        .then((res) => {
+          setAuth("user");
+          navigate("/");
+          setloading(false);
+        })
+        .catch((err) => {
+          setError("email or username is used");
+          setloading(false);
+        });
     }
   }
 

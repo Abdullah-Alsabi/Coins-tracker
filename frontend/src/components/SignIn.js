@@ -15,27 +15,26 @@ function SignIn() {
 
   function hundleSubmit(e) {
     e.preventDefault();
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      setloading(true);
-      axios
-        .post("/users/signin", user, config)
-        .then(() => {
-          setAuth("user");
-          navigate("/");
-          setloading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (error) {
-      setError(error.response.data.message);
-      setloading(false);
-    }
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    setloading(true);
+    axios
+      .post("/users/signin", user, config)
+      .then((res) => {
+        console.log(res);
+        setAuth("user");
+        navigate("/");
+        setloading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("wrong email or password");
+        setloading(false);
+      });
   }
 
   return (
