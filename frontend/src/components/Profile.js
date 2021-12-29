@@ -133,6 +133,19 @@ function Profile() {
                 <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                   <div className="text-center">
                     <p
+                      onClick={hundleUpdate}
+                      type="button"
+                      id="submit"
+                      name="submit"
+                      style={{
+                        borderRadius: "0.3rem",
+                        color: "#444",
+                      }}
+                      className="mt-3 p-2 addTransaction"
+                    >
+                      Update
+                    </p>
+                    <p
                       onClick={() => {
                         navigate("/");
                       }}
@@ -146,19 +159,6 @@ function Profile() {
                       className="mt-3 mb-3 p-2 DeletePortfolio"
                     >
                       Cancel
-                    </p>
-                    <p
-                      onClick={hundleUpdate}
-                      type="button"
-                      id="submit"
-                      name="submit"
-                      style={{
-                        borderRadius: "0.3rem",
-                        color: "#444",
-                      }}
-                      className="mt-3 p-2 addTransaction"
-                    >
-                      Update
                     </p>
                   </div>
                 </div>

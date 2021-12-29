@@ -32,7 +32,7 @@ function SignIn() {
       })
       .catch((err) => {
         console.log(err);
-        setError("wrong email or password");
+        setError("wrong usename or password!");
         setloading(false);
       });
   }
