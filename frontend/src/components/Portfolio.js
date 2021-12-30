@@ -23,23 +23,14 @@ function Portfolio() {
   let userData;
   let data;
   //user id from cookie
-
-  useEffect(() => {
-    // setloading(false);
-    // i have to send the user id throgh the body
-    if (auth !== "user") {
-      navigate("/signin");
-      return null;
-    }
-    userData = JSON.parse(atob(token.split(".")[1]));
-    data = { userId: userData.id._id };
-    setuserId(userData.id._id);
-
+  function getData() {
     axios
       .post("/portfolio/getportfolio/" + id, data)
       .then((res) => {
         setPortfolio(res.data);
-        setcoins([]);
+        console.log(coins);
+        console.log(coins);
+
         res.data.transactions.map(async (t) => {
           let d = await axios
             .get(
@@ -73,6 +64,19 @@ function Portfolio() {
       .catch((err) => {
         console.log(err);
       });
+  }
+  useEffect(() => {
+    // setloading(false);
+    // i have to send the user id throgh the body
+    console.log(auth);
+    if (auth !== "user") {
+      navigate("/signin");
+      return null;
+    }
+    userData = JSON.parse(atob(token.split(".")[1]));
+    data = { userId: userData.id._id };
+    setuserId(userData.id._id);
+    getData();
   }, [deletedtrans]);
 
   if (loading) return <Loading />;
@@ -102,10 +106,8 @@ function Portfolio() {
             axios
               .post("/portfolio/deleteportfolio/" + id, data)
               .then((res) => {
-                setTimeout(() => {
-                  navigate("/portfolios");
-                  setloading(false);
-                }, 1000);
+                navigate("/portfolios");
+                setloading(false);
               })
               .catch((err) => {
                 console.log(err);
@@ -169,9 +171,9 @@ function Portfolio() {
               </tr>
             </thead>
             <tbody>
-              {coins.map((c, index) => {
+              {coins.map((c) => {
                 return (
-                  <tr key={index}>
+                  <tr key={c._id}>
                     <td>
                       <Link to={"/coins/"}>
                         <span>{c.coin.coin.name}</span>
@@ -282,11 +284,14 @@ function Portfolio() {
                               data1
                             )
                             .then((res) => {
+                              setPortfolio({
+                                ...Portfolio,
+                                transactions: res.data,
+                              });
+                              setcoins([]);
+                              getData();
                               setdeletedtrans(res.data);
-                              setTimeout(() => {
-                                setdeletedtrans(res.data);
-                                setloading(false);
-                              }, 1000);
+                              setloading(false);
                             })
                             .catch((err) => {
                               console.log(err);
