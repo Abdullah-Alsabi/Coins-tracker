@@ -17,15 +17,15 @@ function Coins() {
         "https://api.coinstats.app/public/v1/coins?skip=0&limit=100&currency=USD"
       )
       .then((res) => {
-
         setallCoins(res.data.coins);
         setloading(false);
       })
       .catch((err) => {
         console.log(err);
+        setloading(false);
+        alert("Something went wrong");
       });
   }, []);
-
 
   if (loading) return <Loading />;
 
